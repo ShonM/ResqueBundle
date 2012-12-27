@@ -40,7 +40,6 @@ class ResqueListener
 
     protected function shouldThrottle($key, Throttled $throttle)
     {
-        $result = false;
         $redis = $this->resque->redis();
         $result = (bool) $redis->exists($key);
         if ($result === false) {
