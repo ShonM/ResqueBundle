@@ -1,5 +1,5 @@
 {
-    "hash": "004c485f3a66f1be8cf4d946a1a5a4a4",
+    "hash": "1dbb675d53bbe98d5d79b4cb7bafa901",
     "packages": [
         {
             "name": "chrisboulton/php-resque",
@@ -113,6 +113,48 @@
                 "eventmanager",
                 "annotations",
                 "persistence"
+            ]
+        },
+        {
+            "name": "mtdowling/cron-expression",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtdowling/cron-expression",
+                "reference": "8e6e6f7a2fcfc3c60148b45349a7badc1ec1662d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/mtdowling/cron-expression/archive/8e6e6f7a2fcfc3c60148b45349a7badc1ec1662d.zip",
+                "reference": "8e6e6f7a2fcfc3c60148b45349a7badc1ec1662d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "time": "2012-08-23 21:14:29",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Cron": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
+            "keywords": [
+                "cron",
+                "schedule"
             ]
         },
         {
@@ -260,7 +302,7 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ]
+    "stability-flags": {
+        "mtdowling/cron-expression": 20
+    }
 }

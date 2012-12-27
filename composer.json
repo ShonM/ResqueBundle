@@ -13,7 +13,8 @@
     ],
     "require": {
         "symfony/symfony": ">=2.1,<3.0-dev",
-        "chrisboulton/php-resque": "*"
+        "chrisboulton/php-resque": "*",
+        "mtdowling/cron-expression": "dev-master"
     },
     "autoload": {
         "psr-0": { "ShonM\\ResqueBundle": "" }
