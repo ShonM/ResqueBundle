@@ -3,35 +3,113 @@
 namespace ShonM\ResqueBundle\Tests\Functional;
 
 use Symfony\Component\Console\Output\Output,
-    Symfony\Component\Console\Input\ArrayInput,
+    Symfony\Component\Console\Input\StringInput,
     Symfony\Bundle\FrameworkBundle\Console\Application;
 
-class CommandTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
     private $app;
+    private $kernel;
+    private static $container;
 
     protected function setUp()
     {
-        $kernel = new AppKernel();
+        $this->kernel = new AppKernel();
 
-        $this->app = new Application($kernel);
+        $this->app = new Application($this->kernel);
         $this->app->setAutoExit(false);
         $this->app->setCatchExceptions(false);
     }
 
-    private function doRun(array $args = array())
+    private function getContainer()
+    {
+        if (! self::$container) {
+            $this->kernel->boot();
+            self::$container = $this->kernel->getContainer();
+        }
+
+        return self::$container;
+    }
+
+    private function runCommand($command)
     {
         $output = new MemoryOutput();
-        $this->app->run(new ArrayInput($args), $output);
+        $input = new StringInput($command);
+
+        $this->app->run($input, $output);
 
         return $output->getOutput();
     }
 
-    public function testSuccessfulCommand()
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testUntrackedJobStatus()
     {
-        $output = $this->doRun(array('resque:successful'));
+        $this->runCommand('resque:status 123');
+    }
 
-        $this->assertTrue(is_string($output));
+    public function testSuccessfulEnqueue()
+    {
+        $jobId = $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\EmptyJob', 'test');
+
+        $this->assertTrue(is_string($jobId));
+
+        return $jobId;
+    }
+
+    /**
+     * @depends testSuccessfulEnqueue
+     */
+    public function testWaitingStatus($jobId)
+    {
+        $status = $this->runCommand('resque:status ' . $jobId);
+
+        $this->assertEquals(1, $status);
+    }
+
+    /**
+     * @depends testSuccessfulEnqueue
+     */
+    public function testUpdateStatus($jobId)
+    {
+        $status = $this->runCommand('resque:update ' . $jobId . ' ' . 2);
+
+        $this->assertEquals('Job updated!', $status);
+    }
+
+    /**
+     * @depends testSuccessfulEnqueue
+     */
+    public function testUpdatedStatus($jobId)
+    {
+        $status = $this->runCommand('resque:status ' . $jobId);
+
+        $this->assertEquals(2, $status);
+    }
+
+    /**
+     * @depends testSuccessfulEnqueue
+     */
+    public function testQueueSize()
+    {
+        $size = $this->getContainer()->get('resque')->size('test');
+
+        $this->assertEquals(1, $size);
+    }
+
+    /**
+     * @depends testSuccessfulEnqueue
+     */
+    public function testProcessing($job)
+    {
+        $this->runCommand('resque:worker test --interval=1');
+
+        sleep(2);
+
+        $status = $this->runCommand('resque:status ' . $job);
+
+        $this->assertEquals(4, $status);
     }
 }
 

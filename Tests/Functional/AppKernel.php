@@ -40,8 +40,6 @@ class AppKernel extends Kernel
     {
         return array(
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-
-            new \ShonM\ResqueBundle\Tests\Functional\TestBundle\TestBundle(),
             new \ShonM\ResqueBundle\ShonMResqueBundle(),
         );
     }
