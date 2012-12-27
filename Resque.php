@@ -28,7 +28,7 @@ class Resque
         return call_user_func_array(array('Resque', $func), $args);
     }
 
-    public function add($jobName, $queueName, $args = array())
+    public function add($jobName, $queueName = 'default', $args = array())
     {
 
         if (strpos($queueName, ':') !== false) {

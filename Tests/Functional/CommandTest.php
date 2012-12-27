@@ -31,7 +31,7 @@ class CommandTest extends \PHPUnit_Framework_TestCase
     {
         $output = $this->doRun(array('resque:successful'));
 
-        $this->assertNull($output);
+        $this->assertTrue(is_string($output));
     }
 }
 

@@ -10,7 +10,7 @@ namespace ShonM\ResqueBundle\Jobs;
  */
 class Reschedule extends ContainerAwareJob
 {
-    public function perform()
+    public function perform ()
     {
         $scheduler = $this->container->get('resque.scheduler');
         call_user_func_array(array($scheduler, $this->args[0]), $this->args[1]);

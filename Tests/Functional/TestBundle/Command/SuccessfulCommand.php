@@ -15,5 +15,8 @@ class SuccessfulCommand extends \Symfony\Bundle\FrameworkBundle\Command\Containe
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $jobId = $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\EmptyJob');
+
+        $output->write($jobId);
     }
 }
