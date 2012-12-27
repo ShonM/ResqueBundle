@@ -6,7 +6,7 @@ use Symfony\Component\Console\Output\Output,
     Symfony\Component\Console\Input\ArrayInput,
     Symfony\Bundle\FrameworkBundle\Console\Application;
 
-class RunCommandTest extends \PHPUnit_Framework_TestCase
+class CommandTest extends \PHPUnit_Framework_TestCase
 {
     private $app;
 

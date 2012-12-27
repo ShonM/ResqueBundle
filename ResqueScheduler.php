@@ -114,7 +114,7 @@ class ResqueScheduler
     /**
      * Internal - Returns the next delayed queue timestamp
      * @param  int   $atTime Timestamp to check
-     * @return mixed         ID of the job if found, else null
+     * @return mixed ID of the job if found, else null
      */
     public function nextDelayedTimestamp($atTime = null)
     {
@@ -126,7 +126,7 @@ class ResqueScheduler
     /**
      * Internal - Returns the next item to be processed for a given timestamp, null if done
      * @param  int   $timestamp Timestamp to check
-     * @return mixed            ID of the job if found, else null
+     * @return mixed ID of the job if found, else null
      */
     public function nextItemForTimestamp($timestamp)
     {
@@ -156,7 +156,7 @@ class ResqueScheduler
      *   This method is potentially very expensive since it needs to scan through the delayed queue for every timestamp.
      * @param  string $klass Class of the job to remove
      * @param  array  $args  Arguments of the job to remove
-     * @return int           1 if destroyed, 0 if not found
+     * @return int    1 if destroyed, 0 if not found
      */
     public function removeDelayed($klass, array $args)
     {
