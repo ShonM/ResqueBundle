@@ -25,3 +25,19 @@
 ```app/console resque:worker queuename```
 
 **Party**
+
+---
+
+## Testing
+
+**Grab dependencies**
+
+```composer install```
+
+**Get set up**
+
+```cp phpunit.xml.dist phpunit.xml```
+
+**Test away**
+
+```phpunit```

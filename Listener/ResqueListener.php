@@ -89,9 +89,6 @@ class ResqueListener
         return $this->resque->redis()->get($this->lonerKey($queue, $item, $loner)) == "1";
     }
 
-    /**
-     *
-     */
     protected function markLonerAsQueued($queue, $item)
     {
         $loner = $this->annotationReader->getClassAnnotation($item['class'], 'ShonM\ResqueBundle\Annotation\Loner');
@@ -108,7 +105,7 @@ class ResqueListener
 
     protected function markLonerAsUnqueued($queue, $job)
     {
-        $item = $job instanceof Resque_Job ? $job->payload : $job;
+        $item = $job instanceof \Resque_Job ? $job->payload : $job;
         $loner = $this->annotationReader->getClassAnnotation($item['class'], 'ShonM\ResqueBundle\Annotation\Loner');
         if ($loner) {
             $this->resque->redis()->del($this->lonerKey($queue, $item, $loner));

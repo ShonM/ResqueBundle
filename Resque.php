@@ -28,17 +28,17 @@ class Resque
         return call_user_func_array(array('Resque', $func), $args);
     }
 
-    public function add($job_name, $queue_name, $args = array())
+    public function add($jobName, $queueName, $args = array())
     {
 
-        if (strpos($queue_name, ':') !== false) {
-            list($namespace, $queue_name) = explode(':', $queue_name);
+        if (strpos($queueName, ':') !== false) {
+            list($namespace, $queueName) = explode(':', $queueName);
             \Resque_Redis::prefix($namespace);
         }
 
         try {
-            $klass = new \ReflectionClass($job_name);
-            $jobId = \Resque::enqueue($queue_name, $klass->getName(), $args, true);
+            $klass = new \ReflectionClass($jobName);
+            $jobId = \Resque::enqueue($queueName, $klass->getName(), $args, true);
 
             return $jobId;
         } catch (\ReflectionException $rfe) {
@@ -46,21 +46,21 @@ class Resque
         }
     }
 
-    public function check($job_id, $namespace = false)
+    public function check($jobId, $namespace = false)
     {
         if ( ! empty($namespace)) {
             \Resque_Redis::prefix($namespace);
         }
 
-        $status = new \Resque_Job_Status($job_id);
+        $status = new \Resque_Job_Status($jobId);
         if ( ! $status->isTracking()) {
             throw new \RuntimeException("Resque is not tracking the status of this job.\n");
         }
 
         $class = new \ReflectionObject($status);
 
-        foreach ($class->getConstants() as $constant_name => $constant_value) {
-            if ($constant_value == $status->get()) {
+        foreach ($class->getConstants() as $constantValue) {
+            if ($constantValue == $status->get()) {
                 break;
             }
         }
@@ -68,22 +68,22 @@ class Resque
         return $status->get();
     }
 
-    public function update($status, $to_job_id, $namespace)
+    public function update($status, $toJobId, $namespace)
     {
         if ( ! empty($namespace)) {
             \Resque_Redis::prefix($namespace);
         }
 
-        $job = new \Resque_Job_Status($to_job_id);
+        $job = new \Resque_Job_Status($toJobId);
 
         if ( ! $job->get()) {
-            throw new \RuntimeException("Job {$to_job_id} was not found");
+            throw new \RuntimeException("Job {$toJobId} was not found");
         }
 
         $class = new \ReflectionObject($job);
 
-        foreach ($class->getConstants() as $constant_value) {
-            if ($constant_value == $status) {
+        foreach ($class->getConstants() as $constantValue) {
+            if ($constantValue == $status) {
                 $job->update($status);
 
                 return true;

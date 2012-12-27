@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface,
 abstract class ContainerAwareJob implements JobInterface, ContainerAwareInterface
 {
     /**
-     * @var Resque_Job
+     * @var \Resque_Job
      */
     public $job;
 

@@ -8,8 +8,8 @@ class WorkerDaemon
     private $password;
     private $queue = '*';
     private $logging = 'normal';
-    private $checker_interval = 5;
-    private $fork_count = 1;
+    private $checkerInterval = 5;
+    private $forkCount = 1;
 
     public function __construct($redis, $password = false)
     {
@@ -29,7 +29,7 @@ class WorkerDaemon
 
     public function setInterval($interval)
     {
-        $this->checker_interval = (int) $interval;
+        $this->checkerInterval = (int) $interval;
     }
 
     public function forkInstances($count)
@@ -38,19 +38,19 @@ class WorkerDaemon
 
         if ($count > 1) {
             if (function_exists('pcntl_fork')) {
-                $this->fork_count = $count;
+                $this->forkCount = $count;
             } else {
                 fwrite(STDOUT, "*** Fork could not initialized. PHP function pcntl_fork() does NOT exists \n");
-                $this->fork_count = 1;
+                $this->forkCount = 1;
             }
         } else {
-            $this->fork_count = 1;
+            $this->forkCount = 1;
         }
     }
 
     public function getForkInstances()
     {
-        return $this->fork_count;
+        return $this->forkCount;
     }
 
     private function loglevel()
@@ -70,7 +70,7 @@ class WorkerDaemon
         $worker = new \Resque_Worker(explode(',', $this->queue));
         $worker->logLevel = $this->loglevel();
         fwrite(STDOUT, '*** Starting worker: ' . $worker . "\n");
-        $worker->work($this->checker_interval);
+        $worker->work($this->checkerInterval);
     }
 
     public function daemonize()

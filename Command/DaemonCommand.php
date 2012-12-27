@@ -18,11 +18,10 @@ class DaemonCommand extends ContainerAwareCommand
             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
             ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [verbose|normal|none]')
             ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
-            ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1)
-        ;
+            ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $ouput)
     {
         // We have to fetch our resque object first to make sure events get hooked
         $this->getContainer()->get('resque');

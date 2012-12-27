@@ -10,7 +10,6 @@ use Cron\CronExpression;
  */
 class ResqueScheduler
 {
-    private $schedule = array();
     private $resque;
 
     public function __construct(Resque $resque)
@@ -113,8 +112,9 @@ class ResqueScheduler
     }
 
     /**
-     * INTERNAL
-     * Returns the next delayed queue timestamp
+     * Internal - Returns the next delayed queue timestamp
+     * @param  int   $atTime Timestamp to check
+     * @return mixed         ID of the job if found, else null
      */
     public function nextDelayedTimestamp($atTime = null)
     {
@@ -124,8 +124,9 @@ class ResqueScheduler
     }
 
     /**
-     * INTERNAL
-     * Returns the next item to be processed for a given timestamp, null if done
+     * Internal - Returns the next item to be processed for a given timestamp, null if done
+     * @param  int   $timestamp Timestamp to check
+     * @return mixed            ID of the job if found, else null
      */
     public function nextItemForTimestamp($timestamp)
     {
@@ -138,6 +139,7 @@ class ResqueScheduler
 
     /**
      * Clears all jobs created with enqueueAt or enqueueIn
+     * @return null
      */
     public function resetDelayedQueue()
     {
@@ -151,9 +153,10 @@ class ResqueScheduler
 
     /**
      * Given an encoded item, remove it from the delayed_queue
-     *
-     * This method is potentially very expensive since it needs to scan
-     * through the delayed queue for every timestamp.
+     *   This method is potentially very expensive since it needs to scan through the delayed queue for every timestamp.
+     * @param  string $klass Class of the job to remove
+     * @param  array  $args  Arguments of the job to remove
+     * @return int           1 if destroyed, 0 if not found
      */
     public function removeDelayed($klass, array $args)
     {
@@ -191,7 +194,7 @@ class ResqueScheduler
         return $totalJobs;
     }
 
-    public function queueFromClass($klass)
+    public function queueFromClass()
     {
         return 'default';
     }

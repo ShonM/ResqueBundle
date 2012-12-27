@@ -17,11 +17,10 @@ class SchedulerCommand extends ContainerAwareCommand
             ->setDescription("Starts Resque scheduler to trigger future work queues")
             ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [verbose|normal|none]')
             ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
-            ->addOption('foreground', 'f', InputOption::VALUE_NONE, 'Run in foreground')
-        ;
+            ->addOption('foreground', 'f', InputOption::VALUE_NONE, 'Run in foreground');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $ouput)
     {
         if ( ! $input->getOption('foreground')) {
             $pid = pcntl_fork();

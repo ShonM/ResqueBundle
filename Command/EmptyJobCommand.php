@@ -15,11 +15,10 @@ class EmptyJobCommand extends ContainerAwareCommand
         $this
             ->setName('resque:test')
             ->setDescription("Enqueue's an empty job for testing")
-            ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
-        ;
+            ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $ouput)
     {
         return $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\EmptyJob', $input->getArgument('queue'), array());
     }
