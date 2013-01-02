@@ -21,7 +21,7 @@ class DaemonCommand extends ContainerAwareCommand
             ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $ouput)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         // We have to fetch our resque object first to make sure events get hooked
         $this->getContainer()->get('resque');

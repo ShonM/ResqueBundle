@@ -18,7 +18,7 @@ class EmptyJobCommand extends ContainerAwareCommand
             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $ouput)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         return $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\EmptyJob', $input->getArgument('queue'), array());
     }

@@ -20,7 +20,7 @@ class SchedulerCommand extends ContainerAwareCommand
             ->addOption('foreground', 'f', InputOption::VALUE_NONE, 'Run in foreground');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $ouput)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ( ! $input->getOption('foreground')) {
             $pid = pcntl_fork();
