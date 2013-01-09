@@ -1,4 +1,4 @@
-# ResqueBundle [![Build Status](https://secure.travis-ci.org/ShonM/ResqueBundle.png)](http://travis-ci.org/ShonM/ResqueBundle)
+# ResqueBundle [![Build Status](https://travis-ci.org/ShonM/ResqueBundle.png?branch=master)](https://travis-ci.org/ShonM/ResqueBundle)
 
 **Create a Job**
 
