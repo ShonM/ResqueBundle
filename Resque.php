@@ -131,4 +131,18 @@ class Resque
 
         return $queues;
     }
+
+    public function failed($count = false)
+    {
+        if ($count) {
+            return \Resque::failed(true);
+        }
+
+        $failed = array();
+        foreach (\Resque::failed() as $job) {
+            $failed[] = json_decode($job);
+        }
+
+        return $failed;
+    }
 }

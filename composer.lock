@@ -1,50 +1,6 @@
 {
-    "hash": "1dbb675d53bbe98d5d79b4cb7bafa901",
+    "hash": "365e6fa32555bd11f4c2db4afdd75b4d",
     "packages": [
-        {
-            "name": "chrisboulton/php-resque",
-            "version": "1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chrisboulton/php-resque.git",
-                "reference": "1.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/chrisboulton/php-resque/zipball/1.2",
-                "reference": "1.2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "time": "2012-10-13 00:23:06",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-0": {
-                    "Resque": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Boulton",
-                    "email": "chris@bigcommerce.com"
-                }
-            ],
-            "description": "Redis backed library for creating background jobs and processing them later. Based on resque for Ruby.",
-            "homepage": "http://www.github.com/chrisboulton/php-resque/",
-            "keywords": [
-                "redis",
-                "background",
-                "resque",
-                "job"
-            ]
-        },
         {
             "name": "doctrine/common",
             "version": "2.3.0",
@@ -99,7 +55,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -155,6 +111,50 @@
             "keywords": [
                 "cron",
                 "schedule"
+            ]
+        },
+        {
+            "name": "shonm/php-resque",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ShonM/php-resque",
+                "reference": "1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ShonM/php-resque/archive/1.2.zip",
+                "reference": "1.2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2012-10-13 07:28:16",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Resque": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Boulton",
+                    "email": "chris@bigcommerce.com"
+                }
+            ],
+            "description": "Redis backed library for creating background jobs and processing them later. Based on resque for Ruby.",
+            "homepage": "http://www.github.com/chrisboulton/php-resque/",
+            "keywords": [
+                "redis",
+                "background",
+                "resque",
+                "job"
             ]
         },
         {
@@ -248,26 +248,26 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.11.1",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "v1.11.1"
+                "reference": "v1.12.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/archive/v1.11.1.zip",
-                "reference": "v1.11.1",
+                "url": "https://github.com/fabpot/Twig/archive/v1.12.0.zip",
+                "reference": "v1.12.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2012-11-11 17:17:59",
+            "time": "2013-01-08 13:42:43",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.12-dev"
                 }
             },
             "installation-source": "dist",
