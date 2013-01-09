@@ -1,5 +1,5 @@
 {
-    "hash": "365e6fa32555bd11f4c2db4afdd75b4d",
+    "hash": "e419d29306ad04e71ab2f147f4d488ff",
     "packages": [
         {
             "name": "doctrine/common",
@@ -72,6 +72,159 @@
             ]
         },
         {
+            "name": "fresque/fresque",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kamisama/Fresque",
+                "reference": "1.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/kamisama/Fresque/zipball/1.1.0",
+                "reference": "1.1.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "zetacomponents/console-tools": ">=1.6",
+                "zetacomponents/base": ">=1.8"
+            },
+            "suggest": {
+                "kamisama/php-resque-ex": "PHP port of Resque, with phpredis support, and more logging options"
+            },
+            "time": "2012-09-10 20:27:19",
+            "type": "library",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wan Chen",
+                    "email": "kami@kamisama.me",
+                    "homepage": "http://www.kamisama.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A command line tool to manage your php-resque workers",
+            "homepage": "http://kamisama.github.com/Fresque/",
+            "keywords": [
+                "redis",
+                "cli",
+                "php-resque",
+                "resque"
+            ]
+        },
+        {
+            "name": "kamisama/monolog-init",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kamisama/Monolog-Init",
+                "reference": "0.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/kamisama/Monolog-Init/zipball/0.1.1",
+                "reference": "0.1.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "monolog/monolog": ">=1.2.0"
+            },
+            "time": "2012-09-27 12:17:01",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "MonologInit": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wan Chen",
+                    "email": "kami@kamisama.me",
+                    "homepage": "http://www.kamisama.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Very basic and light Dependency Injector Container for Monolog",
+            "homepage": "http://www.github.com/kamisama/monolog-init/",
+            "keywords": [
+                "log"
+            ]
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog",
+                "reference": "1.3.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Seldaek/monolog/archive/1.3.0.zip",
+                "reference": "1.3.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": ">=1.0,<2.0"
+            },
+            "require-dev": {
+                "mlehner/gelf-php": "1.0.*",
+                "raven/raven": "0.3.*",
+                "doctrine/couchdb": "dev-master"
+            },
+            "suggest": {
+                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "raven/raven": "Allow sending log messages to a Sentry server",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server"
+            },
+            "time": "2013-01-07 20:26:46",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Monolog": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ]
+        },
+        {
             "name": "mtdowling/cron-expression",
             "version": "dev-master",
             "source": {
@@ -114,25 +267,70 @@
             ]
         },
         {
-            "name": "shonm/php-resque",
-            "version": "1.2",
+            "name": "psr/log",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ShonM/php-resque",
-                "reference": "1.2"
+                "url": "https://github.com/php-fig/log",
+                "reference": "1.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ShonM/php-resque/archive/1.2.zip",
-                "reference": "1.2",
+                "url": "https://github.com/php-fig/log/archive/1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": ""
+            },
+            "time": "2012-12-21 11:40:51",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ]
+        },
+        {
+            "name": "shonm/php-resque",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ShonM/php-resque",
+                "reference": "f76dea2109135228d590b85fe681b8380e6b6240"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/ShonM/php-resque/archive/f76dea2109135228d590b85fe681b8380e6b6240.zip",
+                "reference": "f76dea2109135228d590b85fe681b8380e6b6240",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.3.0",
+                "monolog/monolog": ">=1.2.0",
+                "fresque/fresque": ">=0.2.5",
+                "kamisama/monolog-init": ">=0.1.1"
             },
-            "time": "2012-10-13 07:28:16",
+            "conflict": {
+                "chrisboulton/php-resque": "*"
+            },
+            "time": "2013-01-09 15:03:35",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Resque": "lib"
@@ -144,14 +342,27 @@
             ],
             "authors": [
                 {
+                    "name": "Wan Chen",
+                    "email": "kami@kamisama.me",
+                    "homepage": "http://www.kamisama.me",
+                    "role": "Developer"
+                },
+                {
                     "name": "Chris Boulton",
                     "email": "chris@bigcommerce.com"
+                },
+                {
+                    "name": "Shon Munro",
+                    "email": "him@shonm.com",
+                    "homepage": "http://shonm.com"
                 }
             ],
-            "description": "Redis backed library for creating background jobs and processing them later. Based on resque for Ruby.",
-            "homepage": "http://www.github.com/chrisboulton/php-resque/",
+            "description": "Redis backed library for creating background jobs and processing them later. PHP port based on resque for Ruby.",
+            "homepage": "http://www.github.com/ShonM/php-resque/",
             "keywords": [
                 "redis",
+                "queue",
+                "php",
                 "background",
                 "resque",
                 "job"
@@ -295,6 +506,128 @@
             "keywords": [
                 "templating"
             ]
+        },
+        {
+            "name": "zetacomponents/base",
+            "version": "1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zetacomponents/Base.git",
+                "reference": "1.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/zetacomponents/Base/zipball/1.8",
+                "reference": "1.8",
+                "shasum": ""
+            },
+            "time": "2009-12-21 04:14:16",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Alexeev"
+                },
+                {
+                    "name": "Sebastian Bergmann"
+                },
+                {
+                    "name": "Jan Borsodi"
+                },
+                {
+                    "name": "Raymond Bosman"
+                },
+                {
+                    "name": "Frederik Holljen"
+                },
+                {
+                    "name": "Kore Nordmann"
+                },
+                {
+                    "name": "Derick Rethans"
+                },
+                {
+                    "name": "Vadym Savchuk"
+                },
+                {
+                    "name": "Tobias Schlitt"
+                },
+                {
+                    "name": "Alexandru Stanoi"
+                }
+            ],
+            "description": "The Base package provides the basic infrastructure that all packages rely on. Therefore every component relies on this package.",
+            "homepage": "https://github.com/zetacomponents"
+        },
+        {
+            "name": "zetacomponents/console-tools",
+            "version": "1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zetacomponents/ConsoleTools.git",
+                "reference": "1.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/zetacomponents/ConsoleTools/zipball/1.6",
+                "reference": "1.6",
+                "shasum": ""
+            },
+            "time": "2009-12-21 04:19:33",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Alexeev"
+                },
+                {
+                    "name": "Sebastian Bergmann"
+                },
+                {
+                    "name": "Jan Borsodi"
+                },
+                {
+                    "name": "Raymond Bosman"
+                },
+                {
+                    "name": "Frederik Holljen"
+                },
+                {
+                    "name": "Kore Nordmann"
+                },
+                {
+                    "name": "Derick Rethans"
+                },
+                {
+                    "name": "Vadym Savchuk"
+                },
+                {
+                    "name": "Tobias Schlitt"
+                },
+                {
+                    "name": "Alexandru Stanoi"
+                }
+            ],
+            "description": "A set of classes to do different actions with the console (also called shell). It can render a progress bar, tables and a status bar and contains a class for parsing command line options.",
+            "homepage": "https://github.com/zetacomponents"
         }
     ],
     "packages-dev": null,
@@ -303,6 +636,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "shonm/php-resque": 20,
         "mtdowling/cron-expression": 20
     }
 }
