@@ -15,11 +15,26 @@ class EmptyJobCommand extends ContainerAwareCommand
         $this
             ->setName('resque:test')
             ->setDescription("Enqueue's an empty job for testing")
+            ->addOption('fail', null, InputOption::VALUE_NONE, 'If passed, will throw an exception')
+            ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)
             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        return $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\EmptyJob', $input->getArgument('queue'), array());
+        $i = $input->getOption('times');
+        while ($i > 0) {
+            $this->queue($input);
+            $i--;
+        }
+
+        return;
+    }
+
+    protected function queue(InputInterface $input)
+    {
+        return $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\EmptyJob', $input->getArgument('queue'), array(
+            'fail' => $input->getOption('fail'),
+        ));
     }
 }
