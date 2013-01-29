@@ -13,7 +13,7 @@
     ],
     "require": {
         "symfony/symfony": ">=2.1,<3.0-dev",
-        "shonm/php-resque": "dev-master",
+        "chrisboulton/php-resque": "dev-master",
         "mtdowling/cron-expression": "dev-master"
     },
     "autoload": {
