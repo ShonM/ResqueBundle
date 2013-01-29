@@ -97,7 +97,7 @@ class Resque
         foreach (\Resque_Worker::all() as $worker) {
             $worker = new Worker($worker);
 
-            if ($queue && ! preg_match('/' . $queue . '/', $worker->__toString())) {
+            if ($queue && ! preg_match('/\\' . $queue . '/', $worker->__toString())) {
                 continue;
             }
 
