@@ -1,4 +1,7 @@
 parameters:
+    resque.host: ''
+    resque.port: ''
+    resque.password: ''
     resque.class: "ShonM\\ResqueBundle\\Resque"
     resque.worker_daemon.class: "ShonM\\ResqueBundle\\WorkerDaemon"
     resque.scheduler.class: "ShonM\\ResqueBundle\\ResqueScheduler"
@@ -7,10 +10,10 @@ parameters:
 services:
     resque:
         class: %resque.class%
-        arguments: [ "%redis_host%:%redis_port%", @service_container ]
+        arguments: [ "%resque.host%:%resque.port%", @service_container ]
     resque.worker_daemon:
         class: %resque.worker_daemon.class%
-        arguments: [ "%redis_host%:%redis_port%", "%redis_password%" ]
+        arguments: [ "%resque.host%:%resque.port%", "%resque.password%" ]
         prototype: true
     resque.scheduler:
         class: %resque.scheduler.class%
