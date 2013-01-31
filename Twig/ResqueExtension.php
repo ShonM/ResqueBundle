@@ -8,6 +8,7 @@ class ResqueExtension extends \Twig_Extension
     {
         return array(
             'json_pretty' => new \Twig_Filter_Method($this, 'jsonPretty', array('is_safe' => array('html'))),
+            'iso8601' => new \Twig_Filter_Method($this, 'iso8601'),
         );
     }
 
@@ -36,6 +37,13 @@ class ResqueExtension extends \Twig_Extension
             }
         }
         return $out;
+    }
+
+    public function iso8601($stamp)
+    {
+        $datetime = new \DateTime($stamp);
+
+        return $datetime->format(\DateTime::ISO8601);
     }
 
     public function getName()

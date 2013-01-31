@@ -1,5 +1,30 @@
 {% extends 'ShonMResqueBundle:Resque:layout.html.twig' %}
 
 {% block body %}
-    Stats!
+    <ul class="thumbnails thumbnails-stats">
+        <li class="span4">
+            <a href="#" class="thumbnail">
+                <h2>{{ resque.stat('processed') }}</h2>
+                Jobs Processed
+            </a>
+        </li>
+        <li class="span4">
+            <a href="{{ path('resque_failed') }}" class="thumbnail">
+                <h2>{{ resque.stat('failed') }}</h2>
+                Failures
+            </a>
+        </li>
+        <li class="span4">
+            <a href="{{ path('resque_queues') }}" class="thumbnail">
+                <h2>{{ queues }}</h2>
+                Registered Queues
+            </a>
+        </li>
+        <li class="span4">
+            <a href="{{ path('resque_workers') }}" class="thumbnail">
+                <h2>{{ workers }}</h2>
+                Active Workers
+            </a>
+        </li>
+    </ul>
 {% endblock body %}

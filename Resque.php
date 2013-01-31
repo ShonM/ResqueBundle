@@ -142,14 +142,21 @@ class Resque
     public function queues($name = false)
     {
         $queues = array();
-        foreach (\Resque::queues() as $queue) {
-            if ($queue == $name) {
+        foreach (\Resque::queues() as $id) {
+            $queue = new Queue($id);
+
+            if ($id === $name) {
                 return $queue;
             }
 
-            $queues[$queue] = $this->size($queue);
+            $queues[$id] = $queue;
         }
 
         return $queues;
+    }
+
+    public function stat($name)
+    {
+        return \Resque_Stat::get($name);
     }
 }

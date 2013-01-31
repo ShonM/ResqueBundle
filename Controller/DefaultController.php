@@ -12,7 +12,11 @@ class DefaultController extends Controller
     {
         $resque = $this->get('resque');
 
-        return $this->render('ShonMResqueBundle:Resque:index.html.twig');
+        return $this->render('ShonMResqueBundle:Resque:index.html.twig', array(
+            'resque' => $resque,
+            'queues' => count($resque->queues()),
+            'workers' => count($resque->workers()),
+        ));
     }
 
     public function queueAction($queue = null)
