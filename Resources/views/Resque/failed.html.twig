@@ -25,10 +25,10 @@
         <tbody>
             {% for job in failed %}
                 <tr>
-                    <td><a href="{{ path('resque_queues', { queue: job.queue } ) }}">{{ job.queue }}</a></td>
+                    <td><a href="{{ path('resque_queues', { queue: job.queue } ) }}" class="label">{{ job.queue }}</a></td>
                     <td><a href="{{ path('resque_workers', { worker: job.worker } ) }}">{{ job.worker }}</a></td>
                     <td>{{ job.payload.class }}</td>
-                    <td>{{ job.payload.args|json_encode|raw }}</td>
+                    <td>{{ job.payload.args.0|json_encode|json_pretty }}</td>
                     <td>{{ job.exception }}</td>
                     <td>{{ macros.errors(job) }}</td>
                     <td>{{ job.failed_at }}</td>

@@ -40,10 +40,12 @@
 
 {% macro worker(worker) %}
     <tr>
-        <td><a href="{{ path('resque_workers', { worker: worker } ) }}">{{ worker }}</a></td>
+        <td>
+            <a href="{{ path('resque_workers', { worker: worker } ) }}">{{ worker }}</a>
+        </td>
         <td>
             {% for queue in worker.queues %}
-                <span class="label label-info">{{ queue.name }}</span>
+                <a href="{{ path('resque_queues', { queue: queue.name } ) }}" class="label">{{ queue.name }}</a>
             {% endfor %}
         </td>
         <td>
@@ -54,7 +56,7 @@
                     <span class="pull-right">{{ job.run_at }}</span>
                 </div>
                 <div>
-                    {{ job.payload.args }}
+                    {{ job.payload.args.0|json_encode|json_pretty }}
                 </div>
             {% else %}
                 <em>Idle</em>

@@ -128,10 +128,12 @@ class Resque
 
     public function worker($name = false)
     {
-        $workers = $this->workers($name);
+        $workers = $this->workers();
 
-        if ($workers) {
-            return reset($workers);
+        foreach ($workers as $worker) {
+            if ($worker->getId() === $name) {
+                return $worker;
+            }
         }
 
         return false;

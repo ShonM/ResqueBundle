@@ -24,3 +24,7 @@ services:
     resque.scheduler_daemon:
         class: %resque.scheduler_daemon.class%
         arguments: [ @resque.scheduler ]
+    resque.twig.resque_extension:
+        class: ShonM\ResqueBundle\Twig\ResqueExtension
+        tags:
+            - { name: twig.extension }
