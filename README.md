@@ -32,6 +32,6 @@
 # Development & Testing
 
 ```
-$ composer install
+$ composer install --dev
 $ bin/phpunit
 ```
