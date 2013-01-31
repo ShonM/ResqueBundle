@@ -1,0 +1,25 @@
+{% extends 'ShonMResqueBundle:Resque:layout.html.twig' %}
+{% set active = 'resque_queues' %}
+
+{% block body %}
+    {% if queue %}
+        Singular Queue
+    {% else %}
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Queued Jobs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name, size in queues %}
+                    <tr>
+                        <td><a href="{{ path('resque_queues', { queue: name } ) }}">{{ name }}</a></td>
+                        <td>{{ size }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock body %}

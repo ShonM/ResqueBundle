@@ -1,7 +1,10 @@
 parameters:
+    # These will be overridden by DI configuration
     resque.host: ''
     resque.port: ''
     resque.password: ''
+
+    # Can be overridden for any reason
     resque.class: "ShonM\\ResqueBundle\\Resque"
     resque.worker_daemon.class: "ShonM\\ResqueBundle\\WorkerDaemon"
     resque.scheduler.class: "ShonM\\ResqueBundle\\ResqueScheduler"

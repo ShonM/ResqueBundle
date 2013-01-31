@@ -10,6 +10,7 @@ class Resque
     public function __construct($redis, ContainerInterface $container)
     {
         \Resque::setBackend($redis);
+
         \Resque_Event::listen('beforePerform', function(\Resque_Job $job) use ($container) {
             // TODO: will this have issues because of forking? Would it be better to create a new container?
             // Easiest way to get new container is $kernel->shutdown();$kernel->boot(); but that maybe too heavy for our purposes
@@ -18,6 +19,24 @@ class Resque
             if ($instance instanceof ContainerAwareInterface) {
                 $instance->setContainer($container);
             }
+        });
+
+        // The most fantastic thing ever - since Redis doesn't allow delete-by-index on lists (because they're actually deque, or "double ended queue"s)
+        // We basically double its output, moving all failures to their own keys as well, which we can operate on afterwards
+        // Actually, the failure list is not even worth maintaining, so let's hope that goes away soon.
+        $that = $this;
+        \Resque_Event::listen('onFailure', function(\Exception $exception, \Resque_Job $job) use ($that) {
+            $data = new \stdClass;
+            $data->failed_at = strftime('%a %b %d %H:%M:%S %Z %Y');
+            $data->payload = $job->payload;
+            $data->exception = get_class($exception);
+            $data->error = $exception->getMessage();
+            $data->backtrace = explode("\n", $exception->getTraceAsString());
+            $data->worker = (string) $job->worker;
+            $data->queue = $job->queue;
+            $data = json_encode($data);
+
+            $that->redis()->set('failed:' . $job->payload['id'], $data);
         });
     }
 

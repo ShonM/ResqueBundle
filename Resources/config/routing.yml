@@ -1,0 +1,12 @@
+resque:
+    pattern: /overview
+    defaults: { _controller: ShonMResqueBundle:Default:index }
+resque_queues:
+    pattern: /queues/{queue}
+    defaults: { _controller: ShonMResqueBundle:Default:queue, queue: false }
+resque_workers:
+    pattern: /workers/{worker}
+    defaults: { _controller: ShonMResqueBundle:Default:workers, worker: false }
+resque_failed:
+    pattern: /failed/{method}/{id}
+    defaults: { _controller: ShonMResqueBundle:Default:failed, method: false, id: false }
