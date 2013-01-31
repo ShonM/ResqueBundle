@@ -12,13 +12,24 @@
                 width: 1260px;
                 margin-left: -630px;
             }
-            .thumbnails-stats li a {
+            .thumbnails-stats li {
+                position: relative;
+            }
+            .thumbnails-stats li a.thumbnail {
                 text-align: center;
                 padding-bottom: 15px;
+            }
+            .thumbnails-stats li a:hover {
+                text-decoration: none;
             }
             .thumbnails-stats li h2 {
                 color: #333 !important;
                 vertical-align: middle;
+            }
+            .thumbnails-stats li a.close {
+                position: absolute;
+                top: 5px;
+                right: 5px;
             }
             .tooltip-inner {
                 max-width: 1000px !important;
@@ -213,6 +224,12 @@
                     });
 
                     $('.backtrace', this).removeClass('untraced');
+                });
+
+                $('.container').tooltip({
+                    selector: 'a.close',
+                    placement: 'bottom',
+                    animation: false
                 });
             });
         </script>

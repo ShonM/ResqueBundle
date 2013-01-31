@@ -19,6 +19,16 @@ class DefaultController extends Controller
         ));
     }
 
+    public function clearAction(Request $request, $stat)
+    {
+        // Let's not get carried away :)
+        if ($stat === 'processed' || $stat === 'failed') {
+            $this->get('resque')->redis()->del('stat:' . $stat);
+        }
+
+        return $this->redirect($this->generateUrl('resque'));
+    }
+
     public function queueAction($queue = null)
     {
         $resque = $this->get('resque');
@@ -51,6 +61,7 @@ class DefaultController extends Controller
                     $job = json_decode($redis->get('failed:' . $id));
                     $this->get('resque')->add($job->payload->class, $job->queue, (array) reset($job->payload->args));
                     $redis->del('failed:' . $id);
+                    $redis->decr('stat:failed');
                     break;
                 case 'again':
                     foreach ($redis->keys('failed:*') as $id) {
@@ -58,15 +69,18 @@ class DefaultController extends Controller
                         $job = json_decode($redis->get('failed:' . $id));
                         $this->get('resque')->add($job->payload->class, $job->queue, (array) reset($job->payload->args));
                         $redis->del('failed:' . $id);
+                        $redis->decr('stat:failed');
                     }
                     break;
                 case 'clear':
                     $redis->del('failed:' . $id);
+                    $redis->del('stat:failed');
                     break;
                 case 'flush':
                     foreach ($redis->keys('failed:*') as $id) {
                         list($prefix, $queue, $id) = explode(':', $id);
                         $redis->del('failed:' . $id);
+                        $redis->decr('stat:failed');
                     }
                     break;
                 default:

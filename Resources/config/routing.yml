@@ -1,6 +1,9 @@
 resque:
     pattern: /overview
     defaults: { _controller: ShonMResqueBundle:Default:index }
+resque_clear:
+    pattern: /clear/{stat}
+    defaults: { _controller: ShonMResqueBundle:Default:clear, stat: processed }
 resque_queues:
     pattern: /queues/{queue}
     defaults: { _controller: ShonMResqueBundle:Default:queue, queue: false }
