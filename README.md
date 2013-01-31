@@ -29,6 +29,14 @@
 
 ---
 
+# Best Practises
+
+ 1. Jobs should be small and simple
+ 2. Workers should be idempotent and transactional
+ 3. Design for concurrency - use connection pooling
+
+---
+
 # Development & Testing
 
 ```
