@@ -2,9 +2,7 @@
 
 namespace ShonM\ResqueBundle\Jobs;
 
-use ShonM\ResqueBundle\Jobs\ContainerAwareJob;
-
-class EmptyJob extends ContainerAwareJob
+class EmptyJob
 {
     public function perform ()
     {
