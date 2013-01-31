@@ -11,7 +11,7 @@
             "email": "him@shonm.com"
         }
     ],
-    "require": {
+    "require-dev": {
         "symfony/symfony": ">=2.1,<3.0-dev",
         "chrisboulton/php-resque": "dev-master",
         "colinmollenhour/credis": "dev-master",
