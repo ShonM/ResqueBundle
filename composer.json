@@ -15,10 +15,15 @@
         "symfony/symfony": ">=2.1,<3.0-dev",
         "chrisboulton/php-resque": "dev-master",
         "colinmollenhour/credis": "dev-master",
-        "mtdowling/cron-expression": "dev-master"
+        "mtdowling/cron-expression": "dev-master",
+        "phpunit/phpunit": "3.8.x-dev"
     },
     "autoload": {
         "psr-0": { "ShonM\\ResqueBundle": "" }
     },
-    "target-dir": "ShonM/ResqueBundle"
+    "target-dir": "ShonM/ResqueBundle",
+    "config": {
+        "bin-dir": "bin"
+    },
+    "minimum-stability": "dev"
 }

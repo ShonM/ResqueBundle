@@ -2,42 +2,36 @@
 
 **Create a Job**
 
-    <?php
+```php
+    // src/Acme/ResqueBundle/Jobs/EmptyJob.php
+    namespace Acme\ResqueBundle\Jobs;
 
-    namespace ShonM\ResqueBundle\Jobs;
-
-    use ShonM\ResqueBundle\Jobs\ContainerAwareJob;
-
-    class EmptyJob extends ContainerAwareJob
+    class HelloWorldJob
     {
         public function perform ()
         {
-            fwrite(STDOUT, "\x1B[31m" . 'Performing a job - Hello from EmptyJob!' . "\x1B[39m" . "\n");
+            fwrite(STDOUT, "Hello " . $this->args['hello'] . "!\n");
         }
     }
+```
 
 **Post your Job**
 
-```$container->get('resque')->add('ShonM\ResqueBundle\Jobs\EmptyJob', 'queuename', array('params'));```
+```php
+    $container->get('resque')->add('Acme\ResqueBundle\Jobs\HelloWorldJob', 'queuename', array('hello' => 'world'));
+```
 
-**Hire some Workers**
+**Hire a Worker**
 
 ```app/console resque:worker queuename```
 
-**Party**
+**Party!**
 
 ---
 
-## Testing
+# Development & Testing
 
-**Grab dependencies**
-
-```composer install```
-
-**Get set up**
-
-```cp phpunit.xml.dist phpunit.xml```
-
-**Test away**
-
-```phpunit ```
+```
+$ composer install
+$ bin/phpunit
+```
