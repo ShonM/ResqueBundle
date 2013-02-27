@@ -53,13 +53,25 @@ class Resque
             \Resque_Redis::prefix($namespace);
         }
 
-        try {
-            $klass = new \ReflectionClass($jobName);
-            $jobId = \Resque::enqueue($queueName, $klass->getName(), $args, true);
+        $klass = new \ReflectionClass($jobName);
 
-            return $jobId;
-        } catch (\ReflectionException $rfe) {
-            throw new \RuntimeException($rfe->getMessage());
+        try {
+            \Resque::redis();
+
+            try {
+                $jobId = \Resque::enqueue($queueName, $klass->getName(), $args, true);
+
+                return $jobId;
+            } catch (\ReflectionException $rfe) {
+                throw new \RuntimeException($rfe->getMessage());
+            }
+        } catch (\CredisException $e) {
+            if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
+                if (in_array('ShonM\ResqueBundle\Jobs\SynchronousInterface', class_implements($jobName))) {
+                    $j = new \Resque_Job($queueName, array('class' => $klass->getName(), 'args' => array($args)));
+                    $j->perform();
+                }
+            }
         }
     }
 
