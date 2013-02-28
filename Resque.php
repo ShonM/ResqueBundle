@@ -69,9 +69,11 @@ class Resque
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
                 if (in_array('ShonM\ResqueBundle\Jobs\SynchronousInterface', class_implements($jobName))) {
                     $j = new \Resque_Job($queueName, array('class' => $klass->getName(), 'args' => array($args)));
-                    $j->perform();
+                    return $j->perform();
                 }
             }
+
+            throw $e;
         }
     }
 
