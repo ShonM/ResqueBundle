@@ -7,7 +7,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface,
 
 class Resque
 {
-    public function __construct($redis, ContainerInterface $container)
+    public $track;
+
+    public function __construct($redis, ContainerInterface $container, $track = true)
     {
         \Resque::setBackend($redis);
 
@@ -38,6 +40,8 @@ class Resque
 
             $that->redis()->set('failed:' . $job->payload['id'], $data);
         });
+
+        $this->track = (bool) $track;
     }
 
     public function __call($func, $args)
@@ -59,7 +63,7 @@ class Resque
             \Resque::redis();
 
             try {
-                $jobId = \Resque::enqueue($queueName, $klass->getName(), $args, true);
+                $jobId = \Resque::enqueue($queueName, $klass->getName(), $args, $this->track);
 
                 return $jobId;
             } catch (\ReflectionException $rfe) {

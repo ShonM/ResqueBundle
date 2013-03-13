@@ -27,10 +27,14 @@ class ShonMResqueExtension extends Extension
         if (!isset($config['password'])) {
             throw new \InvalidArgumentException('The "password" option must be set');
         }
+        if (!isset($config['track'])) {
+            throw new \InvalidArgumentException('The "track" option must be set');
+        }
 
         // Move those config options into parameters (for service injection)
         $container->setParameter('resque.host', $config['host']);
         $container->setParameter('resque.port', $config['port']);
         $container->setParameter('resque.password', $config['password']);
+        $container->setParameter('resque.track', $config['track']);
     }
 }

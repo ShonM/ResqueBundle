@@ -17,6 +17,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('host')->defaultValue('localhost')->end()
             ->scalarNode('port')->defaultValue('6379')->end()
             ->scalarNode('password')->defaultValue('')->end()
+            ->scalarNode('track')->defaultValue(true)->end()
             ->end();
 
         return $treeBuilder;

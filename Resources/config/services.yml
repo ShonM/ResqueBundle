@@ -3,6 +3,7 @@ parameters:
     resque.host: ''
     resque.port: ''
     resque.password: ''
+    resque.track: true
 
     # Can be overridden for any reason
     resque.class: "ShonM\\ResqueBundle\\Resque"
@@ -13,7 +14,7 @@ parameters:
 services:
     resque:
         class: %resque.class%
-        arguments: [ "%resque.host%:%resque.port%", @service_container ]
+        arguments: [ "%resque.host%:%resque.port%", @service_container, "%resque.track%" ]
     resque.worker_daemon:
         class: %resque.worker_daemon.class%
         arguments: [ "%resque.host%:%resque.port%", "%resque.password%" ]
