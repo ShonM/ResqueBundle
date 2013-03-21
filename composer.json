@@ -16,7 +16,7 @@
             "type": "package",
             "package": {
                 "name": "shonm/php-resque",
-                "version": "dev-master",
+                "version": "dev-fastcgi",
                 "source": {
                     "url": "https://github.com/ShonM/php-resque.git",
                     "type": "git",
