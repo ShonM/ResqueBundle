@@ -11,9 +11,26 @@
             "email": "him@shonm.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "shonm/php-resque",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/ShonM/php-resque.git",
+                    "type": "git",
+                    "reference": "fastcgi"
+                },
+                "autoload": {
+                    "psr-0": {"Resque": "lib/"}
+                }
+            }
+        }
+    ],
     "require-dev": {
         "symfony/symfony": ">=2.1,<3.0-dev",
-        "chrisboulton/php-resque": "dev-master",
+        "shonm/php-resque": "dev-fastcgi",
         "colinmollenhour/credis": "dev-master",
         "mtdowling/cron-expression": "dev-master",
         "phpunit/phpunit": "3.8.x-dev"
