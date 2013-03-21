@@ -2,6 +2,8 @@
 
 namespace ShonM\ResqueBundle;
 
+use Resque_JobStrategy_Interface;
+
 class WorkerDaemon
 {
     private $redis;
@@ -10,6 +12,7 @@ class WorkerDaemon
     private $logging = 'normal';
     private $checkerInterval = 5;
     private $forkCount = 1;
+    private $jobStrategy;
 
     public function __construct($redis, $password = false)
     {
@@ -65,10 +68,22 @@ class WorkerDaemon
         }
     }
 
+    public function setJobStrategy(Resque_JobStrategy_Interface $jobStrategy)
+    {
+        $this->jobStrategy = $jobStrategy;
+
+        return $this;
+    }
+
     private function work()
     {
         $worker = new \Resque_Worker(explode(',', $this->queue));
         $worker->logLevel = $this->loglevel();
+
+        if ($this->jobStrategy) {
+            $worker->setJobStrategy($this->jobStrategy);
+        }
+
         fwrite(STDOUT, '*** Starting worker: ' . $worker . "\n");
         $worker->work($this->checkerInterval);
     }
