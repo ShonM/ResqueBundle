@@ -36,5 +36,11 @@ class ShonMResqueExtension extends Extension
         $container->setParameter('resque.port', $config['port']);
         $container->setParameter('resque.password', $config['password']);
         $container->setParameter('resque.track', $config['track']);
+
+        if (! empty($config['strategies'])) {
+            foreach ($config['strategies'] as $strategy => $configuration) {
+                $container->setParameter('resque.strategies.' . $strategy, $configuration);
+            }
+        }
     }
 }

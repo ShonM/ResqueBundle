@@ -43,10 +43,16 @@ class DaemonCommand extends ContainerAwareCommand
                 $jobStrategy = new Resque_JobStrategy_Fork;
                 break;
             case 'fastcgi':
+                $options = $container->hasParameter('resque.strategies.fastcgi') ? $container->getParameter('resque.strategies.fastcgi') : array();
+                $fastcgiWorker = (! empty($options['worker'])) ? $options['worker'] : __DIR__ . '/../Resources/extras/fastcgi_worker.php';
+
                 $jobStrategy = new Resque_JobStrategy_Fastcgi(
                     '127.0.0.1:9000',
-                    realpath(__DIR__ . '/../Resources/extras/fastcgi_worker.php'),
-                    array('BASE_DIR'   => $container->get('kernel')->getRootDir())
+                    realpath($fastcgiWorker),
+                    array(
+                        'BASE_DIR'    => $container->get('kernel')->getRootDir(),
+                        'ENVIRONMENT' => $container->get('kernel')->getEnvironment(),
+                    )
                 );
                 break;
             case 'inprocess':
