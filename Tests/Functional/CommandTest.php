@@ -46,7 +46,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testUntrackedJobStatus()
     {
-        $this->runCommand('resque:status 123');
+        $this->runCommand('resque:job:status 123');
     }
 
     public function testSuccessfulEnqueue()
@@ -63,7 +63,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testWaitingStatus($jobId)
     {
-        $status = $this->runCommand('resque:status ' . $jobId);
+        $status = $this->runCommand('resque:job:status ' . $jobId);
 
         $this->assertEquals(1, $status);
     }
@@ -73,7 +73,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateStatus($jobId)
     {
-        $status = $this->runCommand('resque:update ' . $jobId . ' ' . 2);
+        $status = $this->runCommand('resque:job:update ' . $jobId . ' ' . 2);
 
         $this->assertEquals('Job updated!', $status);
     }
@@ -83,7 +83,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdatedStatus($jobId)
     {
-        $status = $this->runCommand('resque:status ' . $jobId);
+        $status = $this->runCommand('resque:job:status ' . $jobId);
 
         $this->assertEquals(2, $status);
     }
@@ -103,11 +103,11 @@ class BaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessing($job)
     {
-        $this->runCommand('resque:worker test --interval=1');
+        $this->runCommand('resque:worker:start test --interval=1');
 
         sleep(2);
 
-        $status = $this->runCommand('resque:status ' . $job);
+        $status = $this->runCommand('resque:job:status ' . $job);
 
         $this->assertEquals(4, $status);
     }

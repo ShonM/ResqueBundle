@@ -8,11 +8,11 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class StatusCommand extends ContainerAwareCommand
+class JobStatusCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('resque:status')
+        $this->setName('resque:job:status')
              ->setDescription('Check Job status')
              ->addArgument('job_id', InputArgument::REQUIRED, 'Job ID')
              ->addOption("namespace", 'ns', InputOption::VALUE_OPTIONAL, 'Redis Namespace (prefix)')

@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class RestartWorkerCommand extends ContainerAwareCommand
+class WorkerRestartCommand extends ContainerAwareCommand
 {
     protected function configure()
     {

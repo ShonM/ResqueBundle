@@ -8,11 +8,11 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class EmptyJobCommand extends ContainerAwareCommand
+class JobTestCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('resque:test')
+        $this->setName('resque:job:test')
              ->setDescription("Enqueue's an empty job for testing")
              ->addOption('fail', null, InputOption::VALUE_NONE, 'If passed, will throw an exception')
              ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)

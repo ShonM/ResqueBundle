@@ -77,19 +77,6 @@ class WorkerDaemon
 
     private function work()
     {
-        $worker = new \Resque_Worker(explode(',', $this->queue));
-        $worker->logLevel = $this->loglevel();
-
-        if ($this->jobStrategy) {
-            $worker->setJobStrategy($this->jobStrategy);
-        }
-
-        fwrite(STDOUT, '*** Starting worker: ' . $worker . "\n");
-        $worker->work($this->checkerInterval);
-    }
-
-    public function daemonize()
-    {
         \Resque::setBackend($this->redis);
 
         if ($this->password) {
@@ -104,6 +91,19 @@ class WorkerDaemon
             $this->queue = $queue;
         }
 
+        $worker = new \Resque_Worker(explode(',', $this->queue));
+        $worker->logLevel = $this->loglevel();
+
+        if ($this->jobStrategy) {
+            $worker->setJobStrategy($this->jobStrategy);
+        }
+
+        fwrite(STDOUT, '*** Starting worker: ' . $worker . "\n");
+        $worker->work($this->checkerInterval);
+    }
+
+    public function daemonize()
+    {
         if (function_exists('pcntl_fork')) {
             for ($i = 0; $i < $this->getForkInstances(); ++$i) {
                 $pid = pcntl_fork();
