@@ -6,7 +6,8 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+    Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
+    Resque_Worker;
 
 class WorkerRestartCommand extends ContainerAwareCommand
 {
@@ -21,11 +22,16 @@ class WorkerRestartCommand extends ContainerAwareCommand
     {
         $resque = $this->getContainer()->get('resque');
 
+        // Prune dead workers first
+        $worker = new Resque_Worker('*');
+        $worker->pruneDeadWorkers();
+
+        // Now find all existing workers
         $workers = $resque->workers();
 
         foreach ($workers as $worker) {
             list($machine, $process, $queue) = explode(':', $worker->getId());
-            exec('kill -SIGQUIT ' . $process);
+            exec('kill -QUIT ' . $process);
 
             $output->writeln($worker->getId() . ' restarting');
 
