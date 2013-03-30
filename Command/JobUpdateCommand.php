@@ -24,9 +24,9 @@ class JobUpdateCommand extends ContainerAwareCommand
         try {
             $resque = $this->getContainer()->get('resque');
             if ($resque->update($input->getArgument('new_status'), $input->getArgument('job_id'), $input->getOption('namespace'))) {
-                $output->write("Job updated!");
+                $output->write('Job updated!');
             } else {
-                throw new \RuntimeException("Job could NOT be updated.");
+                throw new \RuntimeException('Job could NOT be updated.');
             }
         } catch (\RuntimeException $e) {
             $output->write("ERROR attempting update: {$e->getMessage()}");

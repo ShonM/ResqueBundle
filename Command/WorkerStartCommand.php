@@ -16,7 +16,7 @@ class WorkerStartCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:worker:start')
-             ->setDescription("Starts Resque worker(s)")
+             ->setDescription('Starts Resque worker(s)')
              ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
              ->addOption('no-daemonize', null, InputOption::VALUE_NONE, 'Execute worker inline')
              ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [verbose|normal|none]')
