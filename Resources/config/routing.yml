@@ -1,5 +1,5 @@
 resque:
-    pattern: /overview
+    pattern: /
     defaults: { _controller: ShonMResqueBundle:Default:index }
 resque_clear:
     pattern: /clear/{stat}

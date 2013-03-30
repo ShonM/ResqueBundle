@@ -163,18 +163,13 @@ class ResqueScheduler
         $destroyed = 0;
         $encodedJobHash = $this->encode($this->jobToHash($klass, $args));
         foreach ($this->resque->redis()->zrange('delayed_queue_schedule', 0, -1) as $timestamp) {
-            $destroyed += $this->_removeDelayedJobFromTimestamp($timestamp, $encodedJobHash);
+            $destroyed += $this->removeDelayedJobFromTimestamp($timestamp, $encodedJobHash);
         }
 
         return $destroyed;
     }
 
-    public function removeDelayedJobFromTimestamp($timestamp, $klass, array $args)
-    {
-        return $this->_removeDelayedJobFromTimestamp($timestamp, $this->encode($this->jobToHash($klass, $args)));
-    }
-
-    protected function _removeDelayedJobFromTimestamp($timestamp, $encodedJobHash)
+    protected function removeDelayedJobFromTimestamp($timestamp, $encodedJobHash)
     {
         $key = "delayed:$timestamp";
         $count = $this->resque->redis()->lrem($key, 0, $encodedJobHash);

@@ -2,6 +2,7 @@
 
 if (! isset($_SERVER['RESQUE_JOB'])) {
     header('Status: 500 No Job');
+
     return;
 }
 
@@ -31,5 +32,3 @@ try {
         header('Status: 500');
     }
 }
-
-?>

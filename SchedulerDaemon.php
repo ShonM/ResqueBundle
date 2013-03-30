@@ -58,7 +58,7 @@ class SchedulerDaemon
             try {
                 $this->handleDelayedItems();
             } catch (\Exception $e) {
-                $this->_log((string) $e);
+                $this->log((string) $e);
             }
 
             $this->pollSleep();
@@ -88,7 +88,7 @@ class SchedulerDaemon
             try {
                 $this->enqueueFromConfig($item);
             } catch (\Exception $e) {
-                $this->_log((string) $e);
+                $this->log((string) $e);
             }
         }
 
@@ -130,13 +130,13 @@ class SchedulerDaemon
     protected function log($message)
     {
         if ($this->verbose) {
-            $this->_log($message);
+            $this->log($message);
         }
     }
 
     protected function procline($message)
     {
-        $this->_log($message);
+        $this->log($message);
         if (function_exists('setproctitle')) {
             setproctitle("resque-scheduler: $message");
         }
@@ -150,7 +150,7 @@ class SchedulerDaemon
         pcntl_signal(SIGQUIT, array($this, 'shutdown'));
     }
 
-    private function _log($message)
+    private function log($message)
     {
         if (! $this->mute) {
             fwrite(STDOUT, date('Y-m-d H:i:s') . ' ' . $message . "\n");

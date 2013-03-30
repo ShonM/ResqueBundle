@@ -12,12 +12,12 @@ class EmptyJobCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this
-            ->setName('resque:test')
-            ->setDescription("Enqueue's an empty job for testing")
-            ->addOption('fail', null, InputOption::VALUE_NONE, 'If passed, will throw an exception')
-            ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)
-            ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*');
+        $this->setName('resque:test')
+             ->setDescription("Enqueue's an empty job for testing")
+             ->addOption('fail', null, InputOption::VALUE_NONE, 'If passed, will throw an exception')
+             ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)
+             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
