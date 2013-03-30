@@ -3,7 +3,7 @@
 **Create a Job**
 
 ```php
-    // src/Acme/ResqueBundle/Jobs/EmptyJob.php
+    // src/Acme/ResqueBundle/Jobs/TestJob.php
     namespace Acme\ResqueBundle\Jobs;
 
     class HelloWorldJob
@@ -23,7 +23,7 @@
 
 **Hire a Worker**
 
-```app/console resque:worker queuename```
+```app/console resque:worker:start queuename```
 
 **Party!**
 

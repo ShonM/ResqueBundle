@@ -51,7 +51,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function testSuccessfulEnqueue()
     {
-        $jobId = $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\EmptyJob', 'test');
+        $jobId = $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\TestJob', 'test');
 
         $this->assertTrue(is_string($jobId));
 
