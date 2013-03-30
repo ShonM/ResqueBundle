@@ -1,5 +1,5 @@
 {
-    "hash": "4dd837b08742bfddda4b8c72a9b5d650",
+    "hash": "4454ba20d93da8f49d1741df531da15d",
     "packages": [
 
     ],
@@ -875,16 +875,16 @@
         },
         {
             "name": "shonm/php-resque",
-            "version": "dev-fastcgi",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "e71ef8b449c04ee730406236c99ccf31bd6b3a87"
+                "reference": "9756d325b9fa601725df74ce8c855cef63c0b4de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/e71ef8b449c04ee730406236c99ccf31bd6b3a87",
-                "reference": "e71ef8b449c04ee730406236c99ccf31bd6b3a87",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/9756d325b9fa601725df74ce8c855cef63c0b4de",
+                "reference": "9756d325b9fa601725df74ce8c855cef63c0b4de",
                 "shasum": ""
             },
             "require": {
@@ -926,7 +926,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2013-03-21 15:35:31"
+            "time": "2013-03-30 23:07:44"
         },
         {
             "name": "symfony/symfony",
