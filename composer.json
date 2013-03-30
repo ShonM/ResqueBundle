@@ -27,6 +27,7 @@
         "phpunit/phpunit": "3.7.x"
     },
     "suggest": {
-        "ebernhardson/fastcgi": "Allows php-resque to execute jobs via php-fpm."
+        "ebernhardson/fastcgi": "Allows php-resque to execute jobs via php-fpm.",
+        "symfony/process": "If you want to take advantage of the worker:restart command"
     }
 }
