@@ -6,7 +6,9 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
+    Symfony\Component\Process\Process,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
+    RuntimeException,
     Resque_Worker;
 
 class WorkerRestartCommand extends ContainerAwareCommand
@@ -31,7 +33,13 @@ class WorkerRestartCommand extends ContainerAwareCommand
 
         foreach ($workers as $worker) {
             list($machine, $process, $queue) = explode(':', $worker->getId());
-            exec('kill -QUIT ' . $process);
+
+            $process = new Process('kill -QUIT ' . $process);
+            $process->run();
+
+            if (! $process->isSuccessful()) {
+                throw new RuntimeException($process->getErrorOutput());
+            }
 
             $output->writeln($worker->getId() . ' restarting');
 

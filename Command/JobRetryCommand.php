@@ -22,14 +22,22 @@ class JobRetryCommand extends ContainerAwareCommand
     {
         $resque = $this->getContainer()->get('resque');
 
+        $max = $input->getOption('count');
+        $i = 0;
         while ($failure = $resque->redis()->lpop('failed')) {
             if (! $failure) {
+                $output->writeln('Finished after ' . $max . ' jobs');
                 break;
             }
 
             $job = json_decode($failure, true);
             $resque->add($job['payload']['class'], $job['queue'], $job['payload']['args']);
             $resque->redis()->decr('failed');
+
+            ++$i;
+            if ($i > $max) {
+                break;
+            }
         }
     }
 }
