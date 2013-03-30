@@ -24,6 +24,9 @@
         "shonm/php-resque": "dev-fastcgi",
         "colinmollenhour/credis": "dev-master",
         "mtdowling/cron-expression": "dev-master",
-        "phpunit/phpunit": "3.8.x-dev"
+        "phpunit/phpunit": "3.7.x"
+    },
+    "suggest": {
+        "ebernhardson/fastcgi": "Allows php-resque to execute jobs via php-fpm."
     }
 }
