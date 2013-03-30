@@ -3,22 +3,22 @@
 **Create a Job**
 
 ```php
-    // src/Acme/ResqueBundle/Jobs/TestJob.php
-    namespace Acme\ResqueBundle\Jobs;
+// src/Acme/ResqueBundle/Jobs/TestJob.php
+namespace Acme\ResqueBundle\Jobs;
 
-    class HelloWorldJob
+class HelloWorldJob
+{
+    public function perform ()
     {
-        public function perform ()
-        {
-            fwrite(STDOUT, "Hello " . $this->args['hello'] . "!\n");
-        }
+        fwrite(STDOUT, "Hello " . $this->args['hello'] . "!\n");
     }
+}
 ```
 
 **Post your Job**
 
 ```php
-    $container->get('resque')->add('Acme\ResqueBundle\Jobs\HelloWorldJob', 'queuename', array('hello' => 'world'));
+$container->get('resque')->add('Acme\ResqueBundle\Jobs\HelloWorldJob', 'queuename', array('hello' => 'world'));
 ```
 
 **Hire a Worker**
