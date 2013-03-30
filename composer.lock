@@ -1,5 +1,5 @@
 {
-    "hash": "c002088e8cc09903ac7066c38d11c916",
+    "hash": "1cf0a6b54d662625548a9947e9726ef9",
     "packages": [
 
     ],
@@ -247,12 +247,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "d7987c96675e153638729383577090feed9854f1"
+                "reference": "33f906e257510247d0bcd60b8b54f47cfb51e3ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/d7987c96675e153638729383577090feed9854f1",
-                "reference": "d7987c96675e153638729383577090feed9854f1",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/33f906e257510247d0bcd60b8b54f47cfb51e3ed",
+                "reference": "33f906e257510247d0bcd60b8b54f47cfb51e3ed",
                 "shasum": ""
             },
             "require": {
@@ -313,7 +313,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2013-03-11 00:27:11"
+            "time": "2013-03-24 17:52:59"
         },
         {
             "name": "doctrine/inflector",
@@ -417,7 +417,7 @@
             ],
             "authors": [
                 {
-                    "name": "Christoph Dorn",
+                    "name": "Guilherme Blanco",
                     "email": "guilhermeblanco@gmail.com",
                     "homepage": "http://www.instaclick.com"
                 },
@@ -426,9 +426,9 @@
                     "email": "roman@code-factory.org"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -487,12 +487,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "329adfd039d6d0b07c80a64680d9940dea412e4d"
+                "reference": "38d0ec43e3c553b73f7282db92906d786096ae07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/329adfd039d6d0b07c80a64680d9940dea412e4d",
-                "reference": "329adfd039d6d0b07c80a64680d9940dea412e4d",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/38d0ec43e3c553b73f7282db92906d786096ae07",
+                "reference": "38d0ec43e3c553b73f7282db92906d786096ae07",
                 "shasum": ""
             },
             "require": {
@@ -538,7 +538,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-02-26 18:38:58"
+            "time": "2013-03-30 06:12:22"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -724,12 +724,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6df0e3dd27eab9d9a69d7d88deb9a6c9b325d16f"
+                "reference": "a7a118b85b008fd851781d23333211b2bc98f4ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6df0e3dd27eab9d9a69d7d88deb9a6c9b325d16f",
-                "reference": "6df0e3dd27eab9d9a69d7d88deb9a6c9b325d16f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a7a118b85b008fd851781d23333211b2bc98f4ae",
+                "reference": "a7a118b85b008fd851781d23333211b2bc98f4ae",
                 "shasum": ""
             },
             "require": {
@@ -793,7 +793,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-03-19 10:54:32"
+            "time": "2013-03-29 09:17:56"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -893,12 +893,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "d2f41989ecf5f67bed6aba65861150c3152d70b1"
+                "reference": "adba31564c004b9bd2261c468aa14806481e80e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/d2f41989ecf5f67bed6aba65861150c3152d70b1",
-                "reference": "d2f41989ecf5f67bed6aba65861150c3152d70b1",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/adba31564c004b9bd2261c468aa14806481e80e6",
+                "reference": "adba31564c004b9bd2261c468aa14806481e80e6",
                 "shasum": ""
             },
             "require": {
@@ -935,7 +935,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2013-02-16 10:32:14"
+            "time": "2013-03-28 11:04:49"
         },
         {
             "name": "sebastian/exporter",
@@ -1041,15 +1041,54 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "fastcgi"
+                "reference": "e71ef8b449c04ee730406236c99ccf31bd6b3a87"
             },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/e71ef8b449c04ee730406236c99ccf31bd6b3a87",
+                "reference": "e71ef8b449c04ee730406236c99ccf31bd6b3a87",
+                "shasum": ""
+            },
+            "require": {
+                "colinmollenhour/credis": "dev-master",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ebernhardson/fastcgi": "Allows php-resque to execute jobs via php-fpm.",
+                "ext-proctitle": "Allows php-resque to rename the title of UNIX processes to show the status of a worker.",
+                "ext-redis": "Native PHP extension for Redis connectivity. Credis will automatically utilize when available."
+            },
+            "bin": [
+                "bin/resque"
+            ],
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "Resque": "lib/"
+                    "Resque": "lib"
                 }
             },
-            "time": "2013-03-21 15:07:25"
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Boulton",
+                    "email": "chris@bigcommerce.com"
+                }
+            ],
+            "description": "Redis backed library for creating background jobs and processing them later. Based on resque for Ruby.",
+            "homepage": "http://www.github.com/chrisboulton/php-resque/",
+            "keywords": [
+                "background",
+                "job",
+                "redis",
+                "resque"
+            ],
+            "time": "2013-03-21 15:35:31"
         },
         {
             "name": "symfony/symfony",
@@ -1057,12 +1096,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "e24ce2f22f880de1b706755fa7e21d8bbd65954e"
+                "reference": "92501eb0affead8b06cc8c762583fa08c3c98539"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/e24ce2f22f880de1b706755fa7e21d8bbd65954e",
-                "reference": "e24ce2f22f880de1b706755fa7e21d8bbd65954e",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/92501eb0affead8b06cc8c762583fa08c3c98539",
+                "reference": "92501eb0affead8b06cc8c762583fa08c3c98539",
                 "shasum": ""
             },
             "require": {
@@ -1148,7 +1187,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-03-20 13:55:39"
+            "time": "2013-03-28 17:35:23"
         },
         {
             "name": "twig/twig",
@@ -1156,12 +1195,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "ba67e2cf8e2ca6cada1de5a316a724df648c52ac"
+                "reference": "e8991cc2f9c84b2b5c782203904898717d46e56a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/ba67e2cf8e2ca6cada1de5a316a724df648c52ac",
-                "reference": "ba67e2cf8e2ca6cada1de5a316a724df648c52ac",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/e8991cc2f9c84b2b5c782203904898717d46e56a",
+                "reference": "e8991cc2f9c84b2b5c782203904898717d46e56a",
                 "shasum": ""
             },
             "require": {
@@ -1197,7 +1236,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-03-10 07:23:01"
+            "time": "2013-03-25 07:43:31"
         }
     ],
     "aliases": [
