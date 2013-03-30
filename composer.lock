@@ -1,5 +1,5 @@
 {
-    "hash": "4dd837b08742bfddda4b8c72a9b5d650",
+    "hash": "4454ba20d93da8f49d1741df531da15d",
     "packages": [
 
     ],
@@ -875,16 +875,16 @@
         },
         {
             "name": "shonm/php-resque",
-            "version": "dev-fastcgi",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "e71ef8b449c04ee730406236c99ccf31bd6b3a87"
+                "reference": "cd85e8be852d6ea33e26668b9e55218d2492e91a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/e71ef8b449c04ee730406236c99ccf31bd6b3a87",
-                "reference": "e71ef8b449c04ee730406236c99ccf31bd6b3a87",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/cd85e8be852d6ea33e26668b9e55218d2492e91a",
+                "reference": "cd85e8be852d6ea33e26668b9e55218d2492e91a",
                 "shasum": ""
             },
             "require": {
@@ -895,7 +895,6 @@
                 "phpunit/phpunit": "3.7.*"
             },
             "suggest": {
-                "ebernhardson/fastcgi": "Allows php-resque to execute jobs via php-fpm.",
                 "ext-proctitle": "Allows php-resque to rename the title of UNIX processes to show the status of a worker.",
                 "ext-redis": "Native PHP extension for Redis connectivity. Credis will automatically utilize when available."
             },
@@ -926,7 +925,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2013-03-21 15:35:31"
+            "time": "2013-03-07 03:56:25"
         },
         {
             "name": "symfony/symfony",
