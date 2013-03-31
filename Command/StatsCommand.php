@@ -24,12 +24,19 @@ class StatsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('<info>Job Statistics</info>');
-        $output->writeln('    Processed Jobs : ' . Resque_Stat::get('processed'));
-        $output->writeln('    Failed Jobs    : ' . Resque_Stat::get('failed'));
+        $resque = $this->getContainer()->get('resque');
+        $backlog = 0;
+        foreach ($resque->queues() as $queue) {
+            $backlog += $queue->getSize();
+        }
+
+        $output->writeln('<info>Jobs</info>');
+        $output->writeln('    Backlog : ' . $backlog);
+        $output->writeln('    Processed : ' . Resque_Stat::get('processed'));
+        $output->writeln('    Failed    : ' . Resque_Stat::get('failed'));
         $output->writeln('');
 
-        $output->writeln('<info>Worker Statistics</info>');
+        $output->writeln('<info>Workers</info>');
 
         $workers = Resque_Worker::all();
         $output->writeln('    Active Workers : ' . count($workers));
