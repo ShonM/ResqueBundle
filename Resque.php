@@ -38,7 +38,9 @@ class Resque
             $data->queue = $job->queue;
             $data = json_encode($data);
 
-            $that->redis()->set('failed:' . $job->payload['id'], $data);
+            $id = 'failed:' . $job->payload['id'];
+            $that->redis()->set($id, $data);
+            $that->redis()->expire($id, 86400); // Expires after 24h
         });
 
         $this->track = (bool) $track;
