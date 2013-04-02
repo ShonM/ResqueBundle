@@ -13,9 +13,8 @@ class Resque
     {
         \Resque::setBackend($redis);
 
+        // Forking means this container will become "stale" and workers must be restarted to get a new one
         \Resque_Event::listen('beforePerform', function(\Resque_Job $job) use ($container) {
-            // TODO: will this have issues because of forking? Would it be better to create a new container?
-            // Easiest way to get new container is $kernel->shutdown();$kernel->boot(); but that maybe too heavy for our purposes
             $instance = $job->getInstance();
 
             if ($instance instanceof ContainerAwareInterface) {
