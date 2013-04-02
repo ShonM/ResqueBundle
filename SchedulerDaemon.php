@@ -127,13 +127,6 @@ class SchedulerDaemon
         $this->shutdown = true;
     }
 
-    protected function log($message)
-    {
-        if ($this->verbose) {
-            $this->log($message);
-        }
-    }
-
     protected function procline($message)
     {
         $this->log($message);
@@ -152,7 +145,7 @@ class SchedulerDaemon
 
     private function log($message)
     {
-        if (! $this->mute) {
+        if (! $this->mute && $this->verbose) {
             fwrite(STDOUT, date('Y-m-d H:i:s') . ' ' . $message . "\n");
         }
     }
