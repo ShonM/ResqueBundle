@@ -103,9 +103,9 @@ class BaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testProcessing($job)
     {
-        $this->runCommand('resque:worker:start test --interval=1');
+        $this->runCommand('resque:worker:start test --interval=0');
 
-        sleep(2);
+        usleep(100000);
 
         $status = $this->runCommand('resque:job:status ' . $job);
 
