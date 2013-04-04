@@ -114,7 +114,7 @@ class Resque
         $job = new \Resque_Job_Status($toJobId);
 
         if ( ! $job->get()) {
-            throw new \RuntimeException("Job {$toJobId} was not found");
+            throw new \RuntimeException('Job ' . $toJobId . ' was not found');
         }
 
         $class = new \ReflectionObject($job);

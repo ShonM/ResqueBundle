@@ -84,7 +84,7 @@ class SchedulerDaemon
         }
 
         while ($item = $this->scheduler->nextItemForTimestamp($timestamp)) {
-            $this->log("queueing {$item['class']} [delayed]\n");
+            $this->log("queueing " . $item['class'] . " [delayed]\n");
             try {
                 $this->enqueueFromConfig($item);
             } catch (\Exception $e) {

@@ -29,7 +29,7 @@ class JobUpdateCommand extends ContainerAwareCommand
                 throw new \RuntimeException('Job could NOT be updated.');
             }
         } catch (\RuntimeException $e) {
-            $output->write("ERROR attempting update: {$e->getMessage()}");
+            $output->write('ERROR attempting update: ' . $e->getMessage());
         }
     }
 }
