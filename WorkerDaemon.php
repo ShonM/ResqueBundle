@@ -75,7 +75,7 @@ class WorkerDaemon
         return $this;
     }
 
-    private function work()
+    public function work()
     {
         \Resque::setBackend($this->redis);
 
