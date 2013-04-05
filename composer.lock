@@ -93,9 +93,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -160,9 +160,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -226,9 +226,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -298,9 +298,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -367,9 +367,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -879,12 +879,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "9756d325b9fa601725df74ce8c855cef63c0b4de"
+                "reference": "2565439c2e181b8ea4d108e1e103adc4e6c1a882"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/9756d325b9fa601725df74ce8c855cef63c0b4de",
-                "reference": "9756d325b9fa601725df74ce8c855cef63c0b4de",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/2565439c2e181b8ea4d108e1e103adc4e6c1a882",
+                "reference": "2565439c2e181b8ea4d108e1e103adc4e6c1a882",
                 "shasum": ""
             },
             "require": {
@@ -926,7 +926,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2013-03-30 23:07:44"
+            "time": "2013-04-05 17:17:19"
         },
         {
             "name": "symfony/symfony",
@@ -934,12 +934,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "ea79360fba475ef30222ff5d1750ff6f30934414"
+                "reference": "a7c9863b3a0d1a6fd0646a3a8bbf3f713c84112f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/ea79360fba475ef30222ff5d1750ff6f30934414",
-                "reference": "ea79360fba475ef30222ff5d1750ff6f30934414",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/a7c9863b3a0d1a6fd0646a3a8bbf3f713c84112f",
+                "reference": "a7c9863b3a0d1a6fd0646a3a8bbf3f713c84112f",
                 "shasum": ""
             },
             "require": {
@@ -1025,7 +1025,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-03-27 09:26:00"
+            "time": "2013-04-02 13:28:54"
         },
         {
             "name": "twig/twig",
@@ -1033,12 +1033,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "e8991cc2f9c84b2b5c782203904898717d46e56a"
+                "reference": "399916916533589c95dc04e1afd4aeefa34928ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/e8991cc2f9c84b2b5c782203904898717d46e56a",
-                "reference": "e8991cc2f9c84b2b5c782203904898717d46e56a",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/399916916533589c95dc04e1afd4aeefa34928ad",
+                "reference": "399916916533589c95dc04e1afd4aeefa34928ad",
                 "shasum": ""
             },
             "require": {
@@ -1074,7 +1074,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-03-25 07:43:31"
+            "time": "2013-04-01 08:27:18"
         }
     ],
     "aliases": [
