@@ -43,9 +43,17 @@ class WorkerStartCommand extends ContainerAwareCommand
 
         switch ($input->getOption('strategy')) {
             case 'fork':
+                if (! extension_loaded('pcntl')) {
+                    throw new \RuntimeException('To use the fork strategy, pcntl must be loaded', 1);
+                }
+
                 $jobStrategy = new Resque_JobStrategy_Fork;
                 break;
             case 'batchfork':
+                if (! extension_loaded('pcntl')) {
+                    throw new \RuntimeException('To use the batchfork strategy, pcntl must be loaded', 1);
+                }
+
                 $jobStrategy = new Resque_JobStrategy_BatchFork((int) $input->getOption('perChild'));
                 break;
             case 'fastcgi':
