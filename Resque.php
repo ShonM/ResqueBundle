@@ -16,9 +16,12 @@ use Resque\Worker;
 class Resque
 {
     public $track;
+    private $container;
 
     public function __construct($redis, ContainerInterface $container, $track = true)
     {
+        $this->container = $container;
+
         BaseResque::setBackend($redis);
 
         // Forking means this container will become "stale" and workers must be restarted to get a new one
@@ -40,6 +43,10 @@ class Resque
 
     public function add($jobName, $queueName = 'default', $args = array())
     {
+        if (false !== $pos = strpos($jobName, ':')) {
+            $bundle = $this->container->get('kernel')->getBundle(substr($jobName, 0, $pos));
+            $jobName = $bundle->getNamespace().'\\Jobs\\'.substr($jobName, $pos + 1).'Job';
+        }
 
         if (strpos($queueName, ':') !== false) {
             list($namespace, $queueName) = explode(':', $queueName);
@@ -60,7 +67,7 @@ class Resque
             }
         } catch (\CredisException $e) {
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
-                if (in_array('ShonM\ResqueBundle\Jobs\SynchronousInterface', class_implements($jobName))) {
+                if ($klass->implementsInterface('ShonM\ResqueBundle\Jobs\SynchronousInterface')) {
                     $j = new Job($queueName, array('class' => $klass->getName(), 'args' => array($args)));
 
                     return $j->perform();
