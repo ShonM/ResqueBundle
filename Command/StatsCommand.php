@@ -17,7 +17,6 @@ class StatsCommand extends ContainerAwareCommand
     {
         $this->setName('resque:stats')
              ->setDescription('Enqueue a job')
-             // ->addArgument('class', InputArgument::REQUIRED, 'Full qualified class name')
         ;
     }
 

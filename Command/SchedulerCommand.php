@@ -26,9 +26,9 @@ class SchedulerCommand extends ContainerAwareCommand
             $pid = pcntl_fork();
             if ($pid === -1) {
                 fwrite(STDOUT, "Failed Forking\n");
-                die();
+                die;
             } elseif ($pid) {
-                die();
+                die;
             }
         }
 
