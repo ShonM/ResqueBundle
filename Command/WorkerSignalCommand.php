@@ -10,8 +10,7 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     ShonM\ResqueBundle\Worker,
     InvalidArgumentException,
-    RuntimeException,
-    Resque_Worker;
+    RuntimeException;
 
 class WorkerSignalCommand extends ContainerAwareCommand
 {
@@ -31,7 +30,7 @@ class WorkerSignalCommand extends ContainerAwareCommand
         $resque = $this->getContainer()->get('resque');
 
         // Prune dead workers first
-        $worker = new Resque_Worker('*');
+        $worker = new Worker('*');
         $worker->pruneDeadWorkers();
 
         // Now find all existing workers

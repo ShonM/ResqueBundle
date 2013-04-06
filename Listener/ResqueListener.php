@@ -7,7 +7,8 @@ use Doctrine\Common\Annotations\Reader,
     ShonM\ResqueBundle\Annotation\Throttled,
     ShonM\ResqueBundle\Annotation\Loner,
     ShonM\ResqueBundle\Exception\ThrottledException,
-    ReflectionClass;
+    ReflectionClass,
+    Resque\Job;
 
 class ResqueListener
 {
@@ -20,7 +21,7 @@ class ResqueListener
         $this->annotationReader = $annotationReader;
     }
 
-    public function onBeforeEnqueue(\Resque_Event_BeforeEnqueue $eventArg)
+    public function onBeforeEnqueue(\Resque\Event\BeforeEnqueue $eventArg)
     {
         $class = $eventArg->getClass();
         $throttle = $this->getThrottleAnnotation($class);
@@ -104,7 +105,7 @@ class ResqueListener
 
     protected function markLonerAsUnqueued($queue, $job)
     {
-        $item = $job instanceof \Resque_Job ? $job->payload : $job;
+        $item = $job instanceof Job ? $job->payload : $job;
         $loner = $this->annotationReader->getClassAnnotation($item['class'], 'ShonM\ResqueBundle\Annotation\Loner');
         if ($loner) {
             $this->resque->redis()->del($this->lonerKey($queue, $item, $loner));

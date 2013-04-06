@@ -7,10 +7,10 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    Resque_JobStrategy_Fork,
-    Resque_JobStrategy_BatchFork,
-    Resque_JobStrategy_Fastcgi,
-    Resque_JobStrategy_InProcess;
+    Resque\Job\Strategy\Fork,
+    Resque\Job\Strategy\BatchFork,
+    Resque\Job\Strategy\Fastcgi,
+    Resque\Job\Strategy\InProcess;
 
 class WorkerStartCommand extends ContainerAwareCommand
 {
@@ -47,20 +47,20 @@ class WorkerStartCommand extends ContainerAwareCommand
                     throw new \RuntimeException('To use the fork strategy, pcntl must be loaded', 1);
                 }
 
-                $jobStrategy = new Resque_JobStrategy_Fork;
+                $jobStrategy = new Fork;
                 break;
             case 'batchfork':
                 if (! extension_loaded('pcntl')) {
                     throw new \RuntimeException('To use the batchfork strategy, pcntl must be loaded', 1);
                 }
 
-                $jobStrategy = new Resque_JobStrategy_BatchFork((int) $input->getOption('perChild'));
+                $jobStrategy = new BatchFork((int) $input->getOption('perChild'));
                 break;
             case 'fastcgi':
                 $options = $container->hasParameter('resque.strategies.fastcgi') ? $container->getParameter('resque.strategies.fastcgi') : array();
                 $fastcgiWorker = (! empty($options['worker'])) ? $options['worker'] : __DIR__ . '/../Resources/extras/fastcgi_worker.php';
 
-                $jobStrategy = new Resque_JobStrategy_Fastcgi(
+                $jobStrategy = new Fastcgi(
                     '127.0.0.1:9000',
                     realpath($fastcgiWorker),
                     array(
@@ -70,7 +70,7 @@ class WorkerStartCommand extends ContainerAwareCommand
                 );
                 break;
             case 'inprocess':
-                $jobStrategy = new Resque_JobStrategy_InProcess;
+                $jobStrategy = new InProcess;
                 break;
             default:
                 throw new \InvalidArgumentException('The job strategy ' . $input->getOption('strategy') . ' does not exist');

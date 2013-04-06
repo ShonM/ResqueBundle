@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    Resque_Worker;
+    Resque\Worker;
 
 class WorkerPruneCommand extends ContainerAwareCommand
 {
@@ -24,7 +24,7 @@ class WorkerPruneCommand extends ContainerAwareCommand
         $resque = $this->getContainer()->get('resque');
 
         // Prune dead workers first
-        $worker = new Resque_Worker('*');
+        $worker = new Worker('*');
         $worker->pruneDeadWorkers();
 
         // Now find all existing workers

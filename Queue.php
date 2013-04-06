@@ -2,6 +2,8 @@
 
 namespace ShonM\ResqueBundle;
 
+use Resque\Resque as BaseResque;
+
 class Queue
 {
     private $name;
@@ -13,7 +15,7 @@ class Queue
 
     public function getSize()
     {
-        return \Resque::size($this->name);
+        return BaseResque::size($this->name);
     }
 
     public function getName()

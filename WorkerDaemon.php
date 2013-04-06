@@ -2,7 +2,10 @@
 
 namespace ShonM\ResqueBundle;
 
-use Resque_JobStrategy_Interface;
+use Resque\Resque as BaseResque;
+use Resque\Redis;
+use Resque\Worker;
+use Resque\Job\Strategy\StrategyInterface;
 
 class WorkerDaemon
 {
@@ -60,15 +63,15 @@ class WorkerDaemon
     {
         switch ($this->logging) {
             case 'verbose' :
-                return \Resque_Worker::LOG_VERBOSE;
+                return Worker::LOG_DEBUG;
             case 'normal' :
-                return \Resque_Worker::LOG_NONE;
+                return Worker::LOG_INFO;
             default :
-                return \Resque_Worker::LOG_NONE;
+                return Worker::LOG_INFO;
         }
     }
 
-    public function setJobStrategy(Resque_JobStrategy_Interface $jobStrategy)
+    public function setJobStrategy(StrategyInterface $jobStrategy)
     {
         $this->jobStrategy = $jobStrategy;
 
@@ -77,21 +80,21 @@ class WorkerDaemon
 
     public function work()
     {
-        \Resque::setBackend($this->redis);
+        BaseResque::setBackend($this->redis);
 
         if ($this->password) {
-            \Resque::redis()->auth($this->password);
+            BaseResque::redis()->auth($this->password);
         }
 
         fwrite(STDOUT, '*** Connecting to ' . (($this->password) ? $this->password . '@' : '') . $this->redis . "\n");
 
         if (strpos($this->queue, ':') !== false) {
             list($namespace, $queue) = explode(':', $this->queue);
-            \Resque_Redis::prefix($namespace);
+            Redis::prefix($namespace);
             $this->queue = $queue;
         }
 
-        $worker = new \Resque_Worker(explode(',', $this->queue));
+        $worker = new Worker(explode(',', $this->queue));
         $worker->logLevel = $this->loglevel();
 
         if ($this->jobStrategy) {

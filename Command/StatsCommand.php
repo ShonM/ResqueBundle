@@ -8,9 +8,9 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     DateTime,
-    Resque,
-    Resque_Stat,
-    Resque_Worker;
+    Resque\Resque,
+    Resque\Stat,
+    Resque\Worker;
 
 class StatsCommand extends ContainerAwareCommand
 {
@@ -32,13 +32,13 @@ class StatsCommand extends ContainerAwareCommand
 
         $output->writeln('<info>Jobs</info>');
         $output->writeln('    Backlog : ' . $backlog);
-        $output->writeln('    Processed : ' . Resque_Stat::get('processed'));
-        $output->writeln('    Failed    : ' . Resque_Stat::get('failed'));
+        $output->writeln('    Processed : ' . Stat::get('processed'));
+        $output->writeln('    Failed    : ' . Stat::get('failed'));
         $output->writeln('');
 
         $output->writeln('<info>Workers</info>');
 
-        $workers = Resque_Worker::all();
+        $workers = Worker::all();
         $output->writeln('    Active Workers : ' . count($workers));
         $output->writeln('');
 

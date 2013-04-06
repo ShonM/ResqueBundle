@@ -2,11 +2,13 @@
 
 namespace ShonM\ResqueBundle;
 
+use Resque\Worker as BaseWorker;
+
 class Worker
 {
     protected $job = null;
 
-    public function __construct(\Resque_Worker $worker)
+    public function __construct(BaseWorker $worker)
     {
         $this->worker = $worker;
     }

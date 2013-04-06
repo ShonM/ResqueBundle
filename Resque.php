@@ -5,16 +5,24 @@ namespace ShonM\ResqueBundle;
 use Symfony\Component\DependencyInjection\ContainerInterface,
     Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
+use Resque\Resque as BaseResque;
+use Resque\Redis;
+use Resque\Event;
+use Resque\Stat;
+use Resque\Job;
+use Resque\Job\Status;
+use Resque\Worker;
+
 class Resque
 {
     public $track;
 
     public function __construct($redis, ContainerInterface $container, $track = true)
     {
-        \Resque::setBackend($redis);
+        BaseResque::setBackend($redis);
 
         // Forking means this container will become "stale" and workers must be restarted to get a new one
-        \Resque_Event::listen('beforePerform', function(\Resque_Job $job) use ($container) {
+        Event::listen('beforePerform', function(Job $job) use ($container) {
             $instance = $job->getInstance();
 
             if ($instance instanceof ContainerAwareInterface) {
@@ -27,7 +35,7 @@ class Resque
 
     public function __call($func, $args)
     {
-        return call_user_func_array(array('Resque', $func), $args);
+        return call_user_func_array(array('\Resque\Resque', $func), $args);
     }
 
     public function add($jobName, $queueName = 'default', $args = array())
@@ -35,16 +43,16 @@ class Resque
 
         if (strpos($queueName, ':') !== false) {
             list($namespace, $queueName) = explode(':', $queueName);
-            \Resque_Redis::prefix($namespace);
+            Redis::prefix($namespace);
         }
 
         $klass = new \ReflectionClass($jobName);
 
         try {
-            \Resque::redis();
+            BaseResque::redis();
 
             try {
-                $jobId = \Resque::enqueue($queueName, $klass->getName(), $args, $this->track);
+                $jobId = BaseResque::enqueue($queueName, $klass->getName(), $args, $this->track);
 
                 return $jobId;
             } catch (\ReflectionException $rfe) {
@@ -53,7 +61,7 @@ class Resque
         } catch (\CredisException $e) {
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
                 if (in_array('ShonM\ResqueBundle\Jobs\SynchronousInterface', class_implements($jobName))) {
-                    $j = new \Resque_Job($queueName, array('class' => $klass->getName(), 'args' => array($args)));
+                    $j = new Job($queueName, array('class' => $klass->getName(), 'args' => array($args)));
 
                     return $j->perform();
                 }
@@ -66,10 +74,10 @@ class Resque
     public function check($jobId, $namespace = false)
     {
         if ( ! empty($namespace)) {
-            \Resque_Redis::prefix($namespace);
+            Redis::prefix($namespace);
         }
 
-        $status = new \Resque_Job_Status($jobId);
+        $status = new Status($jobId);
         if ( ! $status->isTracking()) {
             throw new \RuntimeException("Resque is not tracking the status of this job.\n");
         }
@@ -88,10 +96,10 @@ class Resque
     public function update($status, $toJobId, $namespace)
     {
         if ( ! empty($namespace)) {
-            \Resque_Redis::prefix($namespace);
+            Redis::prefix($namespace);
         }
 
-        $job = new \Resque_Job_Status($toJobId);
+        $job = new Status($toJobId);
 
         if ( ! $job->get()) {
             throw new \RuntimeException('Job ' . $toJobId . ' was not found');
@@ -113,7 +121,7 @@ class Resque
     public function workers($queue = false)
     {
         $workers = array();
-        foreach (\Resque_Worker::all() as $worker) {
+        foreach (Worker::all() as $worker) {
             $worker = new Worker($worker);
 
             if ($queue && ! preg_match('/\\' . $queue . '/', $worker->__toString())) {
@@ -142,7 +150,7 @@ class Resque
     public function queues($name = false)
     {
         $queues = array();
-        foreach (\Resque::queues() as $id) {
+        foreach (BaseResque::queues() as $id) {
             $queue = new Queue($id);
 
             if ($id === $name) {
@@ -157,6 +165,6 @@ class Resque
 
     public function stat($name)
     {
-        return \Resque_Stat::get($name);
+        return Stat::get($name);
     }
 }
