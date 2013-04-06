@@ -1,5 +1,5 @@
 {
-    "hash": "4454ba20d93da8f49d1741df531da15d",
+    "hash": "b5246f25584263f81642b4f1613a2a0b",
     "packages": [
 
     ],
@@ -446,12 +446,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mtdowling/cron-expression.git",
-                "reference": "v1.0.1"
+                "reference": "v1.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mtdowling/cron-expression/zipball/v1.0.1",
-                "reference": "v1.0.1",
+                "url": "https://api.github.com/repos/mtdowling/cron-expression/zipball/v1.0.2",
+                "reference": "v1.0.2",
                 "shasum": ""
             },
             "require": {
@@ -479,7 +479,7 @@
                 "cron",
                 "schedule"
             ],
-            "time": "2013-03-06 02:49:08"
+            "time": "2013-04-05 18:55:56"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -875,16 +875,16 @@
         },
         {
             "name": "shonm/php-resque",
-            "version": "dev-master",
+            "version": "dev-namespacing",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "2565439c2e181b8ea4d108e1e103adc4e6c1a882"
+                "reference": "8a6134dac9197a8d2f96d59e4c8e8aaf027e5859"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/2565439c2e181b8ea4d108e1e103adc4e6c1a882",
-                "reference": "2565439c2e181b8ea4d108e1e103adc4e6c1a882",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/8a6134dac9197a8d2f96d59e4c8e8aaf027e5859",
+                "reference": "8a6134dac9197a8d2f96d59e4c8e8aaf027e5859",
                 "shasum": ""
             },
             "require": {
@@ -926,7 +926,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2013-04-05 17:17:19"
+            "time": "2013-04-06 19:04:05"
         },
         {
             "name": "symfony/symfony",

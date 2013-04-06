@@ -21,7 +21,7 @@ class ResqueListener
         $this->annotationReader = $annotationReader;
     }
 
-    public function onBeforeEnqueue(\Resque\Event\BeforeEnqueue $eventArg)
+    public function onBeforeEnqueue($eventArg)
     {
         $class = $eventArg->getClass();
         $throttle = $this->getThrottleAnnotation($class);
@@ -55,7 +55,7 @@ class ResqueListener
         $key = $class;
         if ($throttle->keyMethod) {
             $method = $throttle->keyMethod;
-            $key = $class::$method($throttle, $args);
+            $key = $class::$method($throttle);
         }
 
         return "throttle:$key";

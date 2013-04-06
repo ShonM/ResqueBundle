@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    DateTime,
     Resque\Resque,
     Resque\Stat,
     Resque\Worker;

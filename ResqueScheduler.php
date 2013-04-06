@@ -103,7 +103,7 @@ class ResqueScheduler
 
     public function delayedTimestampPeek($timestamp, $start, $count)
     {
-        $result = $this->zredis->lrange("delayed:$timestamp", $start, $count);
+        $result = $this->resque->redis()->lrange("delayed:$timestamp", $start, $count);
         if (1 === $count) {
             $result = $result ? array($result) : array();
         }

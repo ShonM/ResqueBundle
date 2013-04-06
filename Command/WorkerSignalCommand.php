@@ -8,12 +8,14 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Process\Process,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    ShonM\ResqueBundle\Worker,
+    Resque\Worker,
     InvalidArgumentException,
     RuntimeException;
 
 class WorkerSignalCommand extends ContainerAwareCommand
 {
+    protected $output;
+
     protected function configure()
     {
         $this->setName('resque:worker:signal')
@@ -59,7 +61,8 @@ class WorkerSignalCommand extends ContainerAwareCommand
         if ($target = $input->getArgument('worker')) {
             foreach ($workers as $worker) {
                 if ($target == (string) $worker) {
-                    return $this->signal($worker, $input->getOption('signal'));
+                    $this->signal($worker, $input->getOption('signal'));
+                    return null;
                 }
             }
 
@@ -85,11 +88,13 @@ class WorkerSignalCommand extends ContainerAwareCommand
                 }
             }
         }
+
+        return null;
     }
 
     private function signal(Worker $worker, $signal = 'QUIT')
     {
-        list($machine, $process, $queue) = explode(':', $worker->getId());
+        list(,$process,) = explode(':', $worker->getId());
 
         $process = new Process('kill -' . $signal . ' ' . $process);
         $process->run();

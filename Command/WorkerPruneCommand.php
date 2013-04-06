@@ -20,7 +20,6 @@ class WorkerPruneCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
         $resque = $this->getContainer()->get('resque');
 
         // Prune dead workers first
@@ -31,7 +30,7 @@ class WorkerPruneCommand extends ContainerAwareCommand
         $workers = $resque->workers();
 
         if (! $workers) {
-            return $output->writeln('<error>There are no available workers</error>');
+            $output->writeln('<error>There are no available workers</error>');
         }
     }
 }
