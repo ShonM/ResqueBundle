@@ -1,5 +1,5 @@
 {
-    "hash": "b5246f25584263f81642b4f1613a2a0b",
+    "hash": "4454ba20d93da8f49d1741df531da15d",
     "packages": [
 
     ],
@@ -875,7 +875,7 @@
         },
         {
             "name": "shonm/php-resque",
-            "version": "dev-namespacing",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
