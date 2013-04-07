@@ -19,7 +19,7 @@ class WorkerStartCommand extends ContainerAwareCommand
         $this->setName('resque:worker:start')
              ->setDescription('Starts Resque worker(s)')
              ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
-             ->addOption('no-daemonize', null, InputOption::VALUE_NONE, 'Execute worker inline')
+             ->addOption('foreground', null, InputOption::VALUE_NONE, 'Execute worker in the foreground')
              ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [verbose|normal|none]')
              ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
              ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1)
@@ -79,7 +79,7 @@ class WorkerStartCommand extends ContainerAwareCommand
 
         $worker->setJobStrategy($jobStrategy);
 
-        if ($input->getOption('no-daemonize')) {
+        if ($input->getOption('foreground')) {
             $worker->work();
         } else {
             fwrite(STDOUT, "Daemonizing\n");
