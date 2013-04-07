@@ -16,6 +16,8 @@ class JobTestCommand extends ContainerAwareCommand
              ->setDescription('Enqueue\'s a job for testing')
              ->addOption('fail', null, InputOption::VALUE_NONE, 'If passed, will throw an exception')
              ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)
+             ->addOption('in', null, InputOption::VALUE_OPTIONAL, 'Seconds before enqueueing (requires an active scheduler)', 0)
+             ->addOption('at', null, InputOption::VALUE_OPTIONAL, 'Timestamp at which enqueue should happen (requires an active scheduler)', 0)
              ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
         ;
     }
@@ -24,17 +26,32 @@ class JobTestCommand extends ContainerAwareCommand
     {
         $i = $input->getOption('times');
         while ($i > 0) {
-            $this->queue($input);
+            $this->enqueue($input);
             $i--;
         }
 
         return;
     }
 
-    protected function queue(InputInterface $input)
+    protected function enqueue(InputInterface $input)
     {
-        return $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Jobs\TestJob', $input->getArgument('queue'), array(
+        $resque = $this->getContainer()->get('resque');
+
+        $class = 'ShonM\\ResqueBundle\\Jobs\\TestJob';
+        $args = array(
             'fail' => $input->getOption('fail'),
-        ));
+        );
+
+        if ($input->getOption('in')) {
+            $scheduler = $this->getContainer()->get('resque.scheduler');
+            return $scheduler->enqueueIn($input->getOption('in'), $class, $args);
+        }
+
+        if ($input->getOption('at')) {
+            $scheduler = $this->getContainer()->get('resque.scheduler');
+            return $scheduler->enqueueAt($input->getOption('at'), $class, $args);
+        }
+
+        return $this->getContainer()->get('resque')->add($class, $input->getArgument('queue'), $args);
     }
 }
