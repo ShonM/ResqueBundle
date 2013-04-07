@@ -118,7 +118,7 @@ class ResqueScheduler
      */
     public function nextDelayedTimestamp($atTime = null)
     {
-        $items = $this->resque->redis()->zrangebyscore('delayed_queue_schedule', '-inf', $atTime ?: time(), 'LIMIT', 0, 1);
+        $items = $this->resque->redis()->zrangebyscore('delayed_queue_schedule', '-inf', $atTime ?: time(), array('limit' => array(0, 1)));
 
         return $items ? $items[0] : null;
     }
