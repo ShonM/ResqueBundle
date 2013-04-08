@@ -44,12 +44,12 @@ class JobTestCommand extends ContainerAwareCommand
 
         if ($input->getOption('in')) {
             $scheduler = $this->getContainer()->get('resque.scheduler');
-            return $scheduler->enqueueIn($input->getOption('in'), $class, $args);
+            return $scheduler->enqueueAtWithQueue($input->getArgument('queue'), $input->getOption('in'), $class, $args);
         }
 
         if ($input->getOption('at')) {
             $scheduler = $this->getContainer()->get('resque.scheduler');
-            return $scheduler->enqueueAt($input->getOption('at'), $class, $args);
+            return $scheduler->enqueueInWithQueue($input->getArgument('queue'), $input->getOption('at'), $class, $args);
         }
 
         return $this->getContainer()->get('resque')->add($class, $input->getArgument('queue'), $args);
