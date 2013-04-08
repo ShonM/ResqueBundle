@@ -11,7 +11,7 @@ class SchedulerDaemon
     private $sleeping = false;
     private $shutdown = false;
 
-    public function __construct(ResqueScheduler $scheduler)
+    public function __construct(Scheduler $scheduler)
     {
         $this->scheduler = $scheduler;
     }

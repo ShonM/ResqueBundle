@@ -8,7 +8,7 @@ use Cron\CronExpression;
  * An additional daemon, the Scheduler, is responsible for taking items out of the timestamp queue
  * and into the real queue.
  */
-class ResqueScheduler
+class Scheduler
 {
     private $resque;
 
