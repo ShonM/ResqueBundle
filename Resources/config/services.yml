@@ -8,8 +8,7 @@ parameters:
     # Can be overridden for any reason
     resque.class: "ShonM\\ResqueBundle\\Resque"
     resque.worker_daemon.class: "ShonM\\ResqueBundle\\WorkerDaemon"
-    resque.scheduler.class: "ShonM\\ResqueBundle\\Scheduler"
-    resque.scheduler_daemon.class: "ShonM\\ResqueBundle\\SchedulerDaemon"
+    resque.scheduler.class: "Resque\\Scheduler"
 
 services:
     resque:
@@ -21,7 +20,3 @@ services:
         prototype: true
     resque.scheduler:
         class: %resque.scheduler.class%
-        arguments: [ @resque ]
-    resque.scheduler_daemon:
-        class: %resque.scheduler_daemon.class%
-        arguments: [ @resque.scheduler ]
