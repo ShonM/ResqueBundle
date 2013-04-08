@@ -23,10 +23,10 @@
         "symfony/symfony": ">=2.1,<3.0-dev",
         "shonm/php-resque": "dev-master",
         "colinmollenhour/credis": "dev-master",
-        "mtdowling/cron-expression": "dev-master",
         "phpunit/phpunit": "3.7.x"
     },
     "suggest": {
+        "shonm/php-resque-scheduler": "Allows use of the scheduler component",
         "ebernhardson/fastcgi": "Allows php-resque to execute jobs via php-fpm.",
         "symfony/process": "If you want to take advantage of the worker:restart command"
     }

@@ -1,5 +1,5 @@
 {
-    "hash": "4454ba20d93da8f49d1741df531da15d",
+    "hash": "1787818db7b3aa77b3aa691fe3828610",
     "packages": [
 
     ],
@@ -93,9 +93,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -160,9 +160,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -226,9 +226,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -298,9 +298,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -367,9 +367,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -426,9 +426,9 @@
                     "email": "roman@code-factory.org"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -439,47 +439,6 @@
                 "parser"
             ],
             "time": "2013-03-07 12:15:25"
-        },
-        {
-            "name": "mtdowling/cron-expression",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mtdowling/cron-expression.git",
-                "reference": "v1.0.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mtdowling/cron-expression/zipball/v1.0.2",
-                "reference": "v1.0.2",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Cron": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
-            "keywords": [
-                "cron",
-                "schedule"
-            ],
-            "time": "2013-04-05 18:55:56"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -934,12 +893,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "a7c9863b3a0d1a6fd0646a3a8bbf3f713c84112f"
+                "reference": "83e078a0358d0473766186279e877a5931600c2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/a7c9863b3a0d1a6fd0646a3a8bbf3f713c84112f",
-                "reference": "a7c9863b3a0d1a6fd0646a3a8bbf3f713c84112f",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/83e078a0358d0473766186279e877a5931600c2c",
+                "reference": "83e078a0358d0473766186279e877a5931600c2c",
                 "shasum": ""
             },
             "require": {
@@ -1025,7 +984,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-04-02 13:28:54"
+            "time": "2013-04-07 20:25:23"
         },
         {
             "name": "twig/twig",
@@ -1033,12 +992,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "399916916533589c95dc04e1afd4aeefa34928ad"
+                "reference": "ceadaa68afd5600b96e0dbfd76e063720edf409e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/399916916533589c95dc04e1afd4aeefa34928ad",
-                "reference": "399916916533589c95dc04e1afd4aeefa34928ad",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/ceadaa68afd5600b96e0dbfd76e063720edf409e",
+                "reference": "ceadaa68afd5600b96e0dbfd76e063720edf409e",
                 "shasum": ""
             },
             "require": {
@@ -1074,7 +1033,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-04-01 08:27:18"
+            "time": "2013-04-08 13:07:19"
         }
     ],
     "aliases": [
@@ -1083,8 +1042,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "shonm/php-resque": 20,
-        "colinmollenhour/credis": 20,
-        "mtdowling/cron-expression": 20
+        "colinmollenhour/credis": 20
     },
     "platform": [
 
