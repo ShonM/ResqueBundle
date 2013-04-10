@@ -146,7 +146,7 @@ class Resque
         $workers = $this->workers();
 
         foreach ($workers as $worker) {
-            if ($worker->getId() === $name) {
+            if ($worker === $name) {
                 return $worker;
             }
         }

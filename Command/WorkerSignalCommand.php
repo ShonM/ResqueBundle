@@ -94,7 +94,7 @@ class WorkerSignalCommand extends ContainerAwareCommand
 
     private function signal(Worker $worker, $signal = 'QUIT')
     {
-        list(,$process,) = explode(':', $worker->getId());
+        list(,$process,) = explode(':', $worker);
 
         $process = new Process('kill -' . $signal . ' ' . $process);
         $process->run();
@@ -103,6 +103,6 @@ class WorkerSignalCommand extends ContainerAwareCommand
             throw new RuntimeException($process->getErrorOutput());
         }
 
-        $this->output->writeln($worker->getId() . ' signaled');
+        $this->output->writeln($worker . ' signaled');
     }
 }
