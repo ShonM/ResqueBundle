@@ -4,8 +4,10 @@ namespace ShonM\ResqueBundle;
 
 use Resque\Resque as BaseResque;
 use Resque\Redis;
-use Resque\Worker;
+use ShonM\ResqueBundle\Worker;
 use Resque\Job\Strategy\StrategyInterface;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
+
 
 class WorkerDaemon
 {
@@ -16,11 +18,13 @@ class WorkerDaemon
     private $checkerInterval = 5;
     private $forkCount = 1;
     private $jobStrategy;
+    private $logger;
 
-    public function __construct($redis, $password = false)
+    public function __construct($redis, $password = false, LoggerInterface $logger = null)
     {
         $this->redis = $redis;
         $this->password = $password;
+        $this->logger = $logger;
     }
 
     public function defineQueue($name)
@@ -94,7 +98,7 @@ class WorkerDaemon
             $this->queue = $queue;
         }
 
-        $worker = new Worker(explode(',', $this->queue));
+        $worker = new Worker(explode(',', $this->queue), $this->logger);
         $worker->logLevel = $this->loglevel();
 
         if ($this->jobStrategy) {

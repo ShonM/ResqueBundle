@@ -28,6 +28,7 @@
     "suggest": {
         "shonm/php-resque-scheduler": "Allows use of the scheduler component",
         "ebernhardson/fastcgi": "Allows php-resque to execute jobs via php-fpm.",
-        "symfony/process": "If you want to take advantage of the worker:restart command"
+        "symfony/process": "If you want to take advantage of the worker:restart command",
+        "symfony/monolog-bundle": "Allows logging via monolog instead of STDOUT"
     }
 }
