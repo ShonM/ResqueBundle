@@ -41,7 +41,7 @@ class ThrottleListener
     {
         return $this->annotationReader->getClassAnnotation(
             new ReflectionClass($class),
-            'ShonM\ResqueBundle\Annotation\Throttled'
+            'ShonM\\ResqueBundle\\Annotation\\Throttled'
         );
     }
 

@@ -45,7 +45,6 @@ class LonerListener
         }
     }
 
-    // Both onFailure as well as onAfterPerform
     public function onDone($event)
     {
         $this->markLonerAsUnqueued($event->getJob());
