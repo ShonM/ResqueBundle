@@ -37,7 +37,7 @@ class JobTestCommand extends ContainerAwareCommand
     {
         $resque = $this->getContainer()->get('resque');
 
-        $class = 'ShonM\\ResqueBundle\\Jobs\\TestJob';
+        $class = 'ShonM\\ResqueBundle\\Job\\TestJob';
         $args = array(
             'fail' => $input->getOption('fail'),
         );

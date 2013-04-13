@@ -1,6 +1,6 @@
 <?php
 
-namespace ShonM\ResqueBundle\Jobs;
+namespace ShonM\ResqueBundle\Job;
 
 class TestJob
 {

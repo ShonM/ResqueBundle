@@ -3,8 +3,8 @@
 **Create a Job**
 
 ```php
-// src/Acme/ResqueBundle/Jobs/TestJob.php
-namespace Acme\ResqueBundle\Jobs;
+// src/Acme/ResqueBundle/Job/TestJob.php
+namespace Acme\ResqueBundle\Job;
 
 class HelloWorldJob
 {
@@ -18,7 +18,7 @@ class HelloWorldJob
 **Post your Job**
 
 ```php
-$container->get('resque')->add('Acme\ResqueBundle\Jobs\HelloWorldJob', 'queuename', array('hello' => 'world'));
+$container->get('resque')->add('Acme\ResqueBundle\Job\HelloWorldJob', 'queuename', array('hello' => 'world'));
 ```
 
 **Hire a Worker**

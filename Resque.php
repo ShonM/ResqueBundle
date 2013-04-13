@@ -40,7 +40,7 @@ class Resque extends BaseResque
     {
         if (false !== $pos = strpos($jobName, ':')) {
             $bundle = $this->container->get('kernel')->getBundle(substr($jobName, 0, $pos));
-            $jobName = $bundle->getNamespace().'\\Jobs\\'.substr($jobName, $pos + 1).'Job';
+            $jobName = $bundle->getNamespace().'\\Job\\'.substr($jobName, $pos + 1).'Job';
         }
 
         if (strpos($queueName, ':') !== false) {
@@ -62,7 +62,7 @@ class Resque extends BaseResque
             }
         } catch (\CredisException $e) {
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
-                if ($class->implementsInterface('ShonM\ResqueBundle\Jobs\SynchronousInterface')) {
+                if ($class->implementsInterface('ShonM\ResqueBundle\Job\SynchronousInterface')) {
                     $j = new Job($queueName, array('class' => $class->getName(), 'args' => array($args)));
 
                     return $j->perform();

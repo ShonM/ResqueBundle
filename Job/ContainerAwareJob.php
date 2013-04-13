@@ -1,6 +1,6 @@
 <?php
 
-namespace ShonM\ResqueBundle\Jobs;
+namespace ShonM\ResqueBundle\Job;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface,
     Symfony\Component\DependencyInjection\ContainerInterface,

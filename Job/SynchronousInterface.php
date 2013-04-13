@@ -1,5 +1,5 @@
 <?php
 
-namespace ShonM\ResqueBundle\Jobs;
+namespace ShonM\ResqueBundle\Job;
 
 interface SynchronousInterface {}

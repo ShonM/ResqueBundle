@@ -1,6 +1,6 @@
 <?php
 
-namespace ShonM\ResqueBundle;
+namespace ShonM\ResqueBundle\Job;
 
 interface JobInterface
 {
