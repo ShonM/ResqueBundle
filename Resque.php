@@ -5,7 +5,6 @@ namespace ShonM\ResqueBundle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use ShonM\ResqueBundle\Event as Events;
-use ShonM\ResqueBundle\EventListener\ResqueSubscriber;
 
 use Resque\Resque as BaseResque;
 use Resque\Redis;
@@ -33,9 +32,6 @@ class Resque extends BaseResque
     {
         $dispatcher = $container->get('event_dispatcher');
 
-        $subscriber = new ResqueSubscriber;
-        $dispatcher->addSubscriber($subscriber);
-
         Event::listen('afterEnqueue', function ($class, $arguments, $queue) use ($dispatcher) {
             $event = new Events\AfterEnqueueEvent($class, $arguments, $queue);
             $dispatcher->dispatch(ResqueEvents::AFTER_ENQUEUE, $event);
@@ -56,8 +52,8 @@ class Resque extends BaseResque
             $dispatcher->dispatch(ResqueEvents::AFTER_FORK, $event);
         });
 
-        Event::listen('beforePerform', function (Job $job) use ($container, $dispatcher) {
-            $event = new Events\BeforePerformEvent($container, $job);
+        Event::listen('beforePerform', function (Job $job) use ($dispatcher) {
+            $event = new Events\BeforePerformEvent($job);
             $dispatcher->dispatch(ResqueEvents::BEFORE_PERFORM, $event);
         });
 

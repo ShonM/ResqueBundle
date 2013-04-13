@@ -8,6 +8,7 @@ parameters:
     # Can be overridden for any reason
     resque.class: "ShonM\\ResqueBundle\\Resque"
     resque.scheduler.class: "Resque\\Scheduler"
+    resque.container_aware.listener.class: "ShonM\\ResqueBundle\\EventListener\\ContainerAwareListener"
     resque.throttle.listener.class: "ShonM\\ResqueBundle\\EventListener\\ThrottleListener"
     resque.loner.listener.class: "ShonM\\ResqueBundle\\EventListener\\LonerListener"
 
@@ -20,6 +21,12 @@ services:
 
     resque.scheduler:
         class: %resque.scheduler.class%
+
+    resque.listener.container_aware.before_enqueue:
+        class: %resque.container_aware.listener.class%
+        arguments: [ @service_container ]
+        tags:
+            - { name: kernel.event_listener, event: resque.before_perform, method: onBeforePerform }
 
     resque.listener.throttle.before_enqueue:
         class: %resque.throttle.listener.class%
