@@ -842,12 +842,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "fbe5d9a4579126727bd1d9174da69285bbd5f11f"
+                "reference": "f4de87ff680c3ee65bf4d3e71bf70763ae6b2756"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/fbe5d9a4579126727bd1d9174da69285bbd5f11f",
-                "reference": "fbe5d9a4579126727bd1d9174da69285bbd5f11f",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/f4de87ff680c3ee65bf4d3e71bf70763ae6b2756",
+                "reference": "f4de87ff680c3ee65bf4d3e71bf70763ae6b2756",
                 "shasum": ""
             },
             "require": {
@@ -889,7 +889,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2013-04-13 04:14:39"
+            "time": "2013-04-13 07:10:21"
         },
         {
             "name": "symfony/symfony",
