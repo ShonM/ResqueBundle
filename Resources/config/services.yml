@@ -8,7 +8,8 @@ parameters:
     # Can be overridden for any reason
     resque.class: "ShonM\\ResqueBundle\\Resque"
     resque.scheduler.class: "Resque\\Scheduler"
-    resque.listener.class: "ShonM\\ResqueBundle\\Listener\\ResqueListener"
+    resque.throttle.class: "ShonM\\ResqueBundle\\Throttle"
+    resque.loner.class: "ShonM\\ResqueBundle\\Loner"
 
 services:
     resque:
@@ -18,6 +19,9 @@ services:
             - [setTracking, ["%resque.track%"]]
     resque.scheduler:
         class: %resque.scheduler.class%
-    resque.listener:
-        class: %resque.listener.class%
+    resque.throttle:
+        class: %resque.throttle.class%
+        arguments: [ @resque, @annotation_reader ]
+    resque.loner:
+        class: %resque.loner.class%
         arguments: [ @resque, @annotation_reader ]
