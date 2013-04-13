@@ -6,6 +6,8 @@ use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
+use Resque\Event;
+
 class BaseTest extends \PHPUnit_Framework_TestCase
 {
     private $app;
@@ -19,6 +21,14 @@ class BaseTest extends \PHPUnit_Framework_TestCase
         $this->app = new Application($this->kernel);
         $this->app->setAutoExit(false);
         $this->app->setCatchExceptions(false);
+
+        $this->resque = $this->getContainer()->get('resque');
+    }
+
+    protected function tearDown()
+    {
+        $this->resque = null;
+        Event::clearListeners();
     }
 
     private function getContainer()
@@ -51,7 +61,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function testSuccessfulEnqueue()
     {
-        $jobId = $this->getContainer()->get('resque')->add('ShonM\ResqueBundle\Job\TestJob', 'test');
+        $jobId = $this->resque->add('ShonM\ResqueBundle\Job\TestJob', 'test');
 
         $this->assertTrue(is_string($jobId));
 
@@ -93,7 +103,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testQueueSize()
     {
-        $size = $this->getContainer()->get('resque')->size('test');
+        $size = $this->resque->size('test');
 
         $this->assertEquals(1, $size);
     }
