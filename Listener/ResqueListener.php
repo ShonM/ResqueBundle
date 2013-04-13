@@ -112,13 +112,13 @@ class ResqueListener
         }
     }
 
-    protected function jobDestroy($queue, $klass, $args)
+    protected function jobDestroy($queue, $class, $args)
     {
         $redisQueue = "queue:$queue";
         foreach ($this->resque->redis()->lrange($redisQueue, 0, -1) as $string) {
             $decoded = json_decode($string);
 
-            if ($decoded['class'] == $klass && (empty($args) || $decoded['args'] == $args)) {
+            if ($decoded['class'] == $class && (empty($args) || $decoded['args'] == $args)) {
                 $this->markLonerAsUnqueued($queue, $decoded);
             }
         }

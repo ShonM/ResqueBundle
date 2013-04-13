@@ -13,7 +13,7 @@ use Resque\Job;
 use Resque\Job\Status;
 use Resque\Worker;
 
-class Resque
+class Resque extends BaseResque
 {
     public $track;
     private $container;
@@ -22,7 +22,7 @@ class Resque
     {
         $this->container = $container;
 
-        BaseResque::setBackend($redis);
+        parent::setBackend($redis);
 
         // Forking means this container will become "stale" and workers must be restarted to get a new one
         Event::listen('beforePerform', function(Job $job) use ($container) {
@@ -34,11 +34,6 @@ class Resque
         });
 
         $this->track = (bool) $track;
-    }
-
-    public function __call($func, $args)
-    {
-        return call_user_func_array(array('\Resque\Resque', $func), $args);
     }
 
     public function add($jobName, $queueName = 'default', $args = array())
@@ -53,13 +48,13 @@ class Resque
             Redis::prefix($namespace);
         }
 
-        $klass = new \ReflectionClass($jobName);
+        $class = new \ReflectionClass($jobName);
 
         try {
-            BaseResque::redis();
+            parent::redis();
 
             try {
-                $jobId = BaseResque::enqueue($queueName, $klass->getName(), $args, $this->track);
+                $jobId = parent::enqueue($queueName, $class->getName(), $args, $this->track);
 
                 return $jobId;
             } catch (\ReflectionException $rfe) {
@@ -67,8 +62,8 @@ class Resque
             }
         } catch (\CredisException $e) {
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
-                if ($klass->implementsInterface('ShonM\ResqueBundle\Jobs\SynchronousInterface')) {
-                    $j = new Job($queueName, array('class' => $klass->getName(), 'args' => array($args)));
+                if ($class->implementsInterface('ShonM\ResqueBundle\Jobs\SynchronousInterface')) {
+                    $j = new Job($queueName, array('class' => $class->getName(), 'args' => array($args)));
 
                     return $j->perform();
                 }
@@ -154,10 +149,10 @@ class Resque
         return false;
     }
 
-    public function queues($name = false)
+    public function getQueues($name = false)
     {
         $queues = array();
-        foreach (BaseResque::queues() as $id) {
+        foreach (parent::queues() as $id) {
             $queue = new Queue($id);
 
             if ($id === $name) {

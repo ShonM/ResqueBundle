@@ -24,7 +24,7 @@ class StatsCommand extends ContainerAwareCommand
     {
         $resque = $this->getContainer()->get('resque');
         $backlog = 0;
-        foreach ($resque->queues() as $queue) {
+        foreach ($resque->getQueues() as $queue) {
             $backlog += $queue->getSize();
         }
 
