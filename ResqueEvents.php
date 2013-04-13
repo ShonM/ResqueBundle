@@ -19,7 +19,7 @@ final class ResqueEvents
     const AFTER_ENQUEUE = 'resque.after_enqueue';
 
     /**
-     * Fired once as a worker initializes
+     * Fired once after a worker is initialized, but before it registers for work
      *
      * @var string
      */
