@@ -3,6 +3,7 @@
 namespace ShonM\ResqueBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use ShonM\ResqueBundle\Resque;
 use ShonM\ResqueBundle\Annotation\Throttled;
 use ShonM\ResqueBundle\Exception\ThrottledException;
@@ -18,6 +19,8 @@ class ThrottleListener
     {
         $this->resque = $resque;
         $this->annotationReader = $annotationReader;
+
+        AnnotationRegistry::registerFile(__DIR__ . '/../Annotation/Throttled.php');
     }
 
     public function onBeforeEnqueue($event)
@@ -26,8 +29,10 @@ class ThrottleListener
         $throttle = $this->getThrottleAnnotation($class);
         if ($throttle) {
             $throttleKey = $this->throttleKey($class, $throttle);
-            if ($this->shouldThrottle($throttleKey, $throttle)) {
-                throw new ThrottledException("'$class' with key '$throttleKey' has exceeded it's throttle limit.");
+            $ttl = $this->shouldThrottle($throttleKey, $throttle);
+
+            if ($ttl > 0) {
+                throw new ThrottledException("'$class' with key '$throttleKey' has exceeded it's throttle limit for another $ttl seconds.");
             }
         }
     }
@@ -43,8 +48,9 @@ class ThrottleListener
     protected function shouldThrottle($key, Throttled $throttle)
     {
         $redis = $this->resque->redis();
-        $result = (bool) $redis->exists($key);
-        if ($result === false) {
+        $result = (int) $redis->ttl($key);
+
+        if ($result <= 0) {
             $redis->set($key, true, $throttle->canRunEvery);
         }
 
@@ -54,7 +60,7 @@ class ThrottleListener
     protected function throttleKey($class, $throttle)
     {
         $key = $class;
-        if ($throttle->keyMethod) {
+        if (! empty($throttle->keyMethod)) {
             $method = $throttle->keyMethod;
             $key = $class::$method($throttle);
         }
