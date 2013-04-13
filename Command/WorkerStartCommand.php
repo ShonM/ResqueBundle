@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputOption,
     Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputArgument,
     Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
+    ShonM\ResqueBundle\Worker,
     Resque\Job\Strategy\Fork,
     Resque\Job\Strategy\BatchFork,
     Resque\Job\Strategy\Fastcgi,
@@ -20,7 +21,7 @@ class WorkerStartCommand extends ContainerAwareCommand
              ->setDescription('Starts Resque worker(s)')
              ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
              ->addOption('foreground', null, InputOption::VALUE_NONE, 'Execute worker in the foreground')
-             ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [verbose|normal|none]')
+             ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [DEBUG|INFO|WARNING|ERROR]')
              ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
              ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1)
              ->addOption('strategy', null, InputOption::VALUE_OPTIONAL, 'Job strategy [fork|batchfork|fastcgi|inprocess]', 'fork')
@@ -35,9 +36,8 @@ class WorkerStartCommand extends ContainerAwareCommand
         // We have to fetch our resque object first to make sure events get hooked
         $container->get('resque');
 
-        $worker = $container->get('resque.worker_daemon');
-        $worker->defineQueue($input->getArgument('queue'));
-        $worker->verbose($input->getOption('log'));
+        $worker = new Worker($input->getArgument('queue'));
+        $worker->setLogLevel($input->getOption('log'));
         $worker->setInterval($input->getOption('interval'));
         $worker->forkInstances($input->getOption('forkCount'));
 
@@ -80,7 +80,7 @@ class WorkerStartCommand extends ContainerAwareCommand
         $worker->setJobStrategy($jobStrategy);
 
         if ($input->getOption('foreground')) {
-            $worker->work();
+            $worker->work($input->getOption('interval'));
         } else {
             fwrite(STDOUT, "Daemonizing\n");
             $worker->daemonize();

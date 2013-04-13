@@ -2,8 +2,8 @@
 
 namespace ShonM\ResqueBundle;
 
-use Symfony\Component\DependencyInjection\ContainerInterface,
-    Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 use Resque\Resque as BaseResque;
 use Resque\Redis;
