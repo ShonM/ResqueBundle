@@ -29,7 +29,7 @@ $container->get('resque')->add('Acme\ResqueBundle\Job\HelloWorldJob', 'queuename
 
 ---
 
-# Best Practises
+# Best Practices
 
  1. Jobs should be small and simple
  2. Workers should be idempotent and transactional
