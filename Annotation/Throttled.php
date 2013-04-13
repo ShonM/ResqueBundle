@@ -12,5 +12,5 @@ class Throttled extends Annotation
 {
     public $keyMethod = false;
 
-    public $canRunEvery = 0;
+    public $canRunEvery = 30;
 }
