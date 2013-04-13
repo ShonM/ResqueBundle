@@ -1,4 +1,8 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
     "hash": "1787818db7b3aa77b3aa691fe3828610",
     "packages": [
 
@@ -321,12 +325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "7314da6f9141705f0528c8b72546cb8aeea54ae8"
+                "reference": "8b4b3ccec7aafc596e2fc1e593c9f2e78f939c8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/7314da6f9141705f0528c8b72546cb8aeea54ae8",
-                "reference": "7314da6f9141705f0528c8b72546cb8aeea54ae8",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/8b4b3ccec7aafc596e2fc1e593c9f2e78f939c8c",
+                "reference": "8b4b3ccec7aafc596e2fc1e593c9f2e78f939c8c",
                 "shasum": ""
             },
             "require": {
@@ -367,9 +371,9 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "http://jmsyst.com",
+                    "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -381,7 +385,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2013-03-09 20:00:29"
+            "time": "2013-04-10 16:14:30"
         },
         {
             "name": "doctrine/lexer",
@@ -838,12 +842,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "8a6134dac9197a8d2f96d59e4c8e8aaf027e5859"
+                "reference": "fbe5d9a4579126727bd1d9174da69285bbd5f11f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/8a6134dac9197a8d2f96d59e4c8e8aaf027e5859",
-                "reference": "8a6134dac9197a8d2f96d59e4c8e8aaf027e5859",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/fbe5d9a4579126727bd1d9174da69285bbd5f11f",
+                "reference": "fbe5d9a4579126727bd1d9174da69285bbd5f11f",
                 "shasum": ""
             },
             "require": {
@@ -885,7 +889,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2013-04-06 19:04:05"
+            "time": "2013-04-13 04:14:39"
         },
         {
             "name": "symfony/symfony",
@@ -893,12 +897,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "83e078a0358d0473766186279e877a5931600c2c"
+                "reference": "bedac11d5714de7ea367ec8268c3a7d6561eb22d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/83e078a0358d0473766186279e877a5931600c2c",
-                "reference": "83e078a0358d0473766186279e877a5931600c2c",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/bedac11d5714de7ea367ec8268c3a7d6561eb22d",
+                "reference": "bedac11d5714de7ea367ec8268c3a7d6561eb22d",
                 "shasum": ""
             },
             "require": {
@@ -984,7 +988,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-04-07 20:25:23"
+            "time": "2013-04-12 15:56:02"
         },
         {
             "name": "twig/twig",
@@ -992,12 +996,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "ceadaa68afd5600b96e0dbfd76e063720edf409e"
+                "reference": "f9ad8c089d439a8a41ffd196f6096fbaba0863c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/ceadaa68afd5600b96e0dbfd76e063720edf409e",
-                "reference": "ceadaa68afd5600b96e0dbfd76e063720edf409e",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/f9ad8c089d439a8a41ffd196f6096fbaba0863c1",
+                "reference": "f9ad8c089d439a8a41ffd196f6096fbaba0863c1",
                 "shasum": ""
             },
             "require": {
@@ -1033,7 +1037,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-04-08 13:07:19"
+            "time": "2013-04-13 06:32:43"
         }
     ],
     "aliases": [
