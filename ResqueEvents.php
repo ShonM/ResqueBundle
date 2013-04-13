@@ -5,6 +5,13 @@ namespace ShonM\ResqueBundle;
 final class ResqueEvents
 {
     /**
+     * Fired before a job has been enqueued
+     *
+     * @var string
+     */
+    const BEFORE_ENQUEUE = 'resque.before_enqueue';
+
+    /**
      * Fired after a job has been enqueued
      *
      * @var string

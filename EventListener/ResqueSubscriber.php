@@ -12,6 +12,7 @@ class ResqueSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
+            'resque.before_enqueue'    => array('onBeforeEnqueue', 0),
             'resque.after_enqueue'     => array('onAfterEnqueue', 0),
             'resque.before_first_fork' => array('onBeforeFirstFork', 0),
             'resque.before_fork'       => array('onBeforeFork', 0),
@@ -20,6 +21,10 @@ class ResqueSubscriber implements EventSubscriberInterface
             'resque.after_perform'     => array('onAfterPerform', 0),
             'resque.on_failure'        => array('onFailure', 0),
         );
+    }
+
+    public function onBeforeEnqueue(Events\BeforeEnqueueEvent $event)
+    {
     }
 
     public function onAfterEnqueue(Events\AfterEnqueueEvent $event)

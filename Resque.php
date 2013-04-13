@@ -72,25 +72,28 @@ class Resque extends BaseResque
         });
     }
 
-    public function add($jobName, $queueName = 'default', $args = array())
+    public function add($job, $queue = 'default', $arguments = array())
     {
-        if (false !== $pos = strpos($jobName, ':')) {
-            $bundle = $this->container->get('kernel')->getBundle(substr($jobName, 0, $pos));
-            $jobName = $bundle->getNamespace() . '\\Job\\' . substr($jobName, $pos + 1) . 'Job';
+        if (false !== $pos = strpos($job, ':')) {
+            $bundle = $this->container->get('kernel')->getBundle(substr($job, 0, $pos));
+            $job = $bundle->getNamespace() . '\\Job\\' . substr($job, $pos + 1) . 'Job';
         }
 
-        if (strpos($queueName, ':') !== false) {
-            list($namespace, $queueName) = explode(':', $queueName);
+        $class = new \ReflectionClass($job);
+
+        $event = new Events\BeforeEnqueueEvent($job, $arguments, $queue);
+        $this->container->get('event_dispatcher')->dispatch(ResqueEvents::BEFORE_ENQUEUE, $event);
+
+        if (strpos($queue, ':') !== false) {
+            list($namespace, $queue) = explode(':', $queue);
             Redis::prefix($namespace);
         }
-
-        $class = new \ReflectionClass($jobName);
 
         try {
             parent::redis();
 
             try {
-                $jobId = parent::enqueue($queueName, $class->getName(), $args, $this->tracking);
+                $jobId = parent::enqueue($queue, $class->getName(), $arguments, $this->tracking);
 
                 return $jobId;
             } catch (\ReflectionException $rfe) {
@@ -99,7 +102,7 @@ class Resque extends BaseResque
         } catch (\CredisException $e) {
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
                 if ($class->implementsInterface('ShonM\ResqueBundle\Job\SynchronousInterface')) {
-                    $job = new Job($queueName, array('class' => $class->getName(), 'args' => array($args)));
+                    $job = new Job($queue, array('class' => $class->getName(), 'args' => array($arguments)));
 
                     return $job->perform();
                 }
