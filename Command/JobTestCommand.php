@@ -38,14 +38,17 @@ class JobTestCommand extends ContainerAwareCommand
     {
         $resque = $this->getContainer()->get('resque');
 
-        $class = 'ShonM\\ResqueBundle\\Job\\';
+        $job = 'TestJob';
+
         if ($input->getOption('throttle')) {
-            $class .= 'ThrottledTestJob';
-        } else if ($input->getOption('loner')) {
-            $class .= 'LonelyTestJob';
-        } else {
-            $class .= 'TestJob';
+            $job = 'ThrottledTestJob';
         }
+
+        if ($input->getOption('loner')) {
+            $job = 'LonelyTestJob';
+        }
+
+        $class = 'ShonM\\ResqueBundle\\Job\\' . $job;
 
         $args = array(
             'fail' => $input->getOption('fail'),
