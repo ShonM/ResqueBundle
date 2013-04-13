@@ -2,14 +2,12 @@
 
 namespace ShonM\ResqueBundle\Command;
 
-use Symfony\Component\Console\Input\InputOption,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\Console\Input\InputInterface,
-    Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    Resque\Resque,
-    Resque\Stat,
-    Resque\Worker;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Resque\Resque;
+use Resque\Stat;
+use Resque\Worker;
 
 class StatsCommand extends ContainerAwareCommand
 {

@@ -2,16 +2,16 @@
 
 namespace ShonM\ResqueBundle\Command;
 
-use Symfony\Component\Console\Input\InputOption,
-    Symfony\Component\Console\Input\InputInterface,
-    Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    ShonM\ResqueBundle\Worker,
-    Resque\Job\Strategy\Fork,
-    Resque\Job\Strategy\BatchFork,
-    Resque\Job\Strategy\Fastcgi,
-    Resque\Job\Strategy\InProcess;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use ShonM\ResqueBundle\Worker;
+use Resque\Job\Strategy\Fork;
+use Resque\Job\Strategy\BatchFork;
+use Resque\Job\Strategy\Fastcgi;
+use Resque\Job\Strategy\InProcess;
 
 class WorkerStartCommand extends ContainerAwareCommand
 {
@@ -21,7 +21,7 @@ class WorkerStartCommand extends ContainerAwareCommand
              ->setDescription('Starts Resque worker(s)')
              ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
              ->addOption('foreground', null, InputOption::VALUE_NONE, 'Execute worker in the foreground')
-             ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [DEBUG|INFO|WARNING|ERROR]')
+             ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [DEBUG|INFO|WARNING|ERROR]', 'ERROR')
              ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
              ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1)
              ->addOption('strategy', null, InputOption::VALUE_OPTIONAL, 'Job strategy [fork|batchfork|fastcgi|inprocess]', 'fork')

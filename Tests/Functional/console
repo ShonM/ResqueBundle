@@ -2,8 +2,8 @@
 
 require_once __DIR__.'/AppKernel.php';
 
-use Symfony\Bundle\FrameworkBundle\Console\Application,
-    ShonM\ResqueBundle\Tests\Functional\AppKernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use ShonM\ResqueBundle\Tests\Functional\AppKernel;
 
 $kernel = new AppKernel();
 $kernel->boot();

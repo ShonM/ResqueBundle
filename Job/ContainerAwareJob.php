@@ -2,9 +2,9 @@
 
 namespace ShonM\ResqueBundle\Job;
 
-use Symfony\Component\DependencyInjection\ContainerAwareInterface,
-    Symfony\Component\DependencyInjection\ContainerInterface,
-    ShonM\ResqueBundle\JobInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use ShonM\ResqueBundle\JobInterface;
 
 abstract class ContainerAwareJob implements JobInterface, ContainerAwareInterface
 {

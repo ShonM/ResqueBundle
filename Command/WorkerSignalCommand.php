@@ -2,15 +2,15 @@
 
 namespace ShonM\ResqueBundle\Command;
 
-use Symfony\Component\Console\Input\InputOption,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\Console\Input\InputInterface,
-    Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Component\Process\Process,
-    Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
-    Resque\Worker,
-    InvalidArgumentException,
-    RuntimeException;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Resque\Worker;
+use InvalidArgumentException;
+use RuntimeException;
 
 class WorkerSignalCommand extends ContainerAwareCommand
 {
@@ -62,6 +62,7 @@ class WorkerSignalCommand extends ContainerAwareCommand
             foreach ($workers as $worker) {
                 if ($target == (string) $worker) {
                     $this->signal($worker, $input->getOption('signal'));
+
                     return null;
                 }
             }

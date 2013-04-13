@@ -10,9 +10,9 @@ call_user_func(function() {
     require_once $autoloadFile;
 });
 
-use Symfony\Component\Filesystem\Filesystem,
-    Symfony\Component\Config\Loader\LoaderInterface,
-    Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {

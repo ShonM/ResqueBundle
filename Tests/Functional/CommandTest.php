@@ -2,9 +2,9 @@
 
 namespace ShonM\ResqueBundle\Tests\Functional;
 
-use Symfony\Component\Console\Output\Output,
-    Symfony\Component\Console\Input\StringInput,
-    Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Output\Output;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 class BaseTest extends \PHPUnit_Framework_TestCase
 {

@@ -2,13 +2,13 @@
 
 namespace ShonM\ResqueBundle\Listener;
 
-use Doctrine\Common\Annotations\Reader,
-    ShonM\ResqueBundle\Resque,
-    ShonM\ResqueBundle\Annotation\Throttled,
-    ShonM\ResqueBundle\Annotation\Loner,
-    ShonM\ResqueBundle\Exception\ThrottledException,
-    ReflectionClass,
-    Resque\Job;
+use Doctrine\Common\Annotations\Reader;
+use ShonM\ResqueBundle\Resque;
+use ShonM\ResqueBundle\Annotation\Throttled;
+use ShonM\ResqueBundle\Annotation\Loner;
+use ShonM\ResqueBundle\Exception\ThrottledException;
+use ReflectionClass;
+use Resque\Job;
 
 class ResqueListener
 {

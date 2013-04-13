@@ -2,8 +2,7 @@
 
 namespace ShonM\ResqueBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle,
-    Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ShonMResqueBundle extends Bundle
 {
