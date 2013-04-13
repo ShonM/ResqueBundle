@@ -18,15 +18,14 @@ class WorkerStartCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:worker:start')
-             ->setDescription('Starts Resque worker(s)')
-             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
-             ->addOption('foreground', null, InputOption::VALUE_NONE, 'Execute worker in the foreground')
-             ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [DEBUG|INFO|WARNING|ERROR]', 'ERROR')
-             ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
-             ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1)
-             ->addOption('strategy', null, InputOption::VALUE_OPTIONAL, 'Job strategy [fork|batchfork|fastcgi|inprocess]', 'fork')
-             ->addOption('perChild', null, InputOption::VALUE_OPTIONAL, 'If strategy "batchfork" is used, this is the number of jobs between forks, 0 is unlimited', 0)
-        ;
+            ->setDescription('Starts Resque worker(s)')
+            ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
+            ->addOption('foreground', null, InputOption::VALUE_NONE, 'Execute worker in the foreground')
+            ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [DEBUG|INFO|WARNING|ERROR]', 'ERROR')
+            ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
+            ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1)
+            ->addOption('strategy', null, InputOption::VALUE_OPTIONAL, 'Job strategy [fork|batchfork|fastcgi|inprocess]', 'fork')
+            ->addOption('perChild', null, InputOption::VALUE_OPTIONAL, 'If strategy "batchfork" is used, this is the number of jobs between forks, 0 is unlimited', 0);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

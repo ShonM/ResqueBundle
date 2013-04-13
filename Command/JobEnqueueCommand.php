@@ -14,11 +14,10 @@ class JobEnqueueCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:job:enqueue')
-             ->setDescription('Enqueue a job')
-             ->addArgument('class', InputArgument::REQUIRED, 'Full qualified class name')
-             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
-             ->addArgument('arguments', InputArgument::OPTIONAL, 'JSON arguments for the job', null)
-        ;
+            ->setDescription('Enqueue a job')
+            ->addArgument('class', InputArgument::REQUIRED, 'Full qualified class name')
+            ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
+            ->addArgument('arguments', InputArgument::OPTIONAL, 'JSON arguments for the job', null);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

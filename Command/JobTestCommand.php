@@ -13,13 +13,12 @@ class JobTestCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:job:test')
-             ->setDescription('Enqueue\'s a job for testing')
-             ->addOption('fail', null, InputOption::VALUE_NONE, 'If passed, will throw an exception')
-             ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)
-             ->addOption('in', null, InputOption::VALUE_OPTIONAL, 'Seconds before enqueueing (requires an active scheduler)', 0)
-             ->addOption('at', null, InputOption::VALUE_OPTIONAL, 'Timestamp at which enqueue should happen (requires an active scheduler)', 0)
-             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
-        ;
+            ->setDescription('Enqueue\'s a job for testing')
+            ->addOption('fail', null, InputOption::VALUE_NONE, 'If passed, will throw an exception')
+            ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)
+            ->addOption('in', null, InputOption::VALUE_OPTIONAL, 'Seconds before enqueueing (requires an active scheduler)', 0)
+            ->addOption('at', null, InputOption::VALUE_OPTIONAL, 'Timestamp at which enqueue should happen (requires an active scheduler)', 0)
+            ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

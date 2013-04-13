@@ -16,6 +16,7 @@ use Resque\Worker;
 class Resque extends BaseResque
 {
     public $track;
+
     private $container;
 
     public function __construct($redis, ContainerInterface $container, $track = true)
@@ -25,7 +26,7 @@ class Resque extends BaseResque
         parent::setBackend($redis);
 
         // Forking means this container will become "stale" and workers must be restarted to get a new one
-        Event::listen('beforePerform', function(Job $job) use ($container) {
+        Event::listen('beforePerform', function (Job $job) use ($container) {
             $instance = $job->getInstance();
 
             if ($instance instanceof ContainerAwareInterface) {
@@ -40,7 +41,7 @@ class Resque extends BaseResque
     {
         if (false !== $pos = strpos($jobName, ':')) {
             $bundle = $this->container->get('kernel')->getBundle(substr($jobName, 0, $pos));
-            $jobName = $bundle->getNamespace().'\\Job\\'.substr($jobName, $pos + 1).'Job';
+            $jobName = $bundle->getNamespace() . '\\Job\\' . substr($jobName, $pos + 1) . 'Job';
         }
 
         if (strpos($queueName, ':') !== false) {
@@ -63,9 +64,9 @@ class Resque extends BaseResque
         } catch (\CredisException $e) {
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
                 if ($class->implementsInterface('ShonM\ResqueBundle\Job\SynchronousInterface')) {
-                    $j = new Job($queueName, array('class' => $class->getName(), 'args' => array($args)));
+                    $job = new Job($queueName, array('class' => $class->getName(), 'args' => array($args)));
 
-                    return $j->perform();
+                    return $job->perform();
                 }
             }
 

@@ -12,9 +12,8 @@ class JobRetryCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:job:retry')
-             ->setDescription('Retries jobs by moving them from the failure list to their original queue')
-             ->addOption('count', 'c', InputOption::VALUE_OPTIONAL, 'Number of jobs to retry', 1)
-        ;
+            ->setDescription('Retries jobs by moving them from the failure list to their original queue')
+            ->addOption('count', 'c', InputOption::VALUE_OPTIONAL, 'Number of jobs to retry', 1);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

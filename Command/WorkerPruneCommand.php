@@ -12,8 +12,7 @@ class WorkerPruneCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:worker:prune')
-             ->setDescription('Prunes inactive workers')
-        ;
+            ->setDescription('Prunes inactive workers');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

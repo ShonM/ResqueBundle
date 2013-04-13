@@ -14,8 +14,7 @@ class StatsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:stats')
-             ->setDescription('Enqueue a job')
-        ;
+            ->setDescription('Enqueue a job');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

@@ -19,11 +19,10 @@ class WorkerSignalCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:worker:signal')
-             ->setDescription('Signal workers (shutdown, restart, pause, and resume)')
-             ->addArgument('worker', InputArgument::OPTIONAL, 'Worker name')
-             ->addOption('signal', null, InputOption::VALUE_OPTIONAL, 'Signal [QUIT|TERM|INT|USR1|USR2|CONT]', 'QUIT')
-             ->addOption('all', null, InputOption::VALUE_NONE, 'Signal all workers')
-        ;
+            ->setDescription('Signal workers (shutdown, restart, pause, and resume)')
+            ->addArgument('worker', InputArgument::OPTIONAL, 'Worker name')
+            ->addOption('signal', null, InputOption::VALUE_OPTIONAL, 'Signal [QUIT|TERM|INT|USR1|USR2|CONT]', 'QUIT')
+            ->addOption('all', null, InputOption::VALUE_NONE, 'Signal all workers');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

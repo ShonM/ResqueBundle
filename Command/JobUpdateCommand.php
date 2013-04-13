@@ -13,10 +13,10 @@ class JobUpdateCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:job:update')
-             ->setDescription('Update a Job status')
-             ->addArgument('job_id', InputArgument::REQUIRED, 'The Job ID')
-             ->addArgument('new_status', InputArgument::REQUIRED, 'New Status')
-             ->addOption('namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Redis Namespace (prefix)');
+            ->setDescription('Update a Job status')
+            ->addArgument('job_id', InputArgument::REQUIRED, 'The Job ID')
+            ->addArgument('new_status', InputArgument::REQUIRED, 'New Status')
+            ->addOption('namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Redis Namespace (prefix)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

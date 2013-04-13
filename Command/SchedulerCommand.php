@@ -13,10 +13,9 @@ class SchedulerCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('resque:scheduler')
-             ->setDescription('Starts Resque scheduler to trigger future work queues')
-             ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
-             ->addOption('foreground', 'f', InputOption::VALUE_NONE, 'Run in foreground')
-        ;
+            ->setDescription('Starts Resque scheduler to trigger future work queues')
+            ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
+            ->addOption('foreground', 'f', InputOption::VALUE_NONE, 'Run in foreground');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
