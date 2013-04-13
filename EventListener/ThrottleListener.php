@@ -1,6 +1,6 @@
 <?php
 
-namespace ShonM\ResqueBundle\Listener;
+namespace ShonM\ResqueBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
 use ShonM\ResqueBundle\Resque;
@@ -8,7 +8,7 @@ use ShonM\ResqueBundle\Annotation\Throttled;
 use ShonM\ResqueBundle\Exception\ThrottledException;
 use ReflectionClass;
 
-class Throttle
+class ThrottleListener
 {
     protected $resque;
 
@@ -20,10 +20,9 @@ class Throttle
         $this->annotationReader = $annotationReader;
     }
 
-    // Not referenced
-    public function onBeforeEnqueue($eventArg)
+    public function onBeforeEnqueue($event)
     {
-        $class = $eventArg->getClass();
+        $class = $event->getClass();
         $throttle = $this->getThrottleAnnotation($class);
         if ($throttle) {
             $throttleKey = $this->throttleKey($class, $throttle);

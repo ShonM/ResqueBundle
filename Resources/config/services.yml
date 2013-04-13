@@ -8,8 +8,8 @@ parameters:
     # Can be overridden for any reason
     resque.class: "ShonM\\ResqueBundle\\Resque"
     resque.scheduler.class: "Resque\\Scheduler"
-    resque.throttle.class: "ShonM\\ResqueBundle\\Throttle"
-    resque.loner.class: "ShonM\\ResqueBundle\\Loner"
+    resque.throttle.listener.class: "ShonM\\ResqueBundle\\EventListener\\ThrottleListener"
+    resque.loner.listener.class: "ShonM\\ResqueBundle\\EventListener\\LonerListener"
 
 services:
     resque:
@@ -17,11 +17,28 @@ services:
         arguments: [ "%resque.host%:%resque.port%", @service_container ]
         calls:
             - [setTracking, ["%resque.track%"]]
+
     resque.scheduler:
         class: %resque.scheduler.class%
-    resque.throttle:
-        class: %resque.throttle.class%
+
+    resque.listener.throttle.before_enqueue:
+        class: %resque.throttle.listener.class%
         arguments: [ @resque, @annotation_reader ]
-    resque.loner:
-        class: %resque.loner.class%
+        tags:
+            - { name: kernel.event_listener, event: resque.before_enqueue, method: onBeforeEnqueue }
+
+    resque.listener.loner.before_enqueue:
+        class: %resque.loner.listener.class%
         arguments: [ @resque, @annotation_reader ]
+        tags:
+            - { name: kernel.event_listener, event: resque.before_enqueue, method: onBeforeEnqueue }
+    resque.listener.loner.after_perform:
+        class: %resque.loner.listener.class%
+        arguments: [ @resque, @annotation_reader ]
+        tags:
+            - { name: kernel.event_listener, event: resque.after_perform, method: onAfterPerform }
+    resque.listener.loner.on_failure:
+        class: %resque.loner.listener.class%
+        arguments: [ @resque, @annotation_reader ]
+        tags:
+            - { name: kernel.event_listener, event: resque.on_failure, method: onFailure }
