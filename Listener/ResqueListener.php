@@ -12,8 +12,9 @@ use Resque\Job;
 
 class ResqueListener
 {
-    protected $annotationReader;
     protected $resque;
+
+    protected $annotationReader;
 
     public function __construct(Resque $resque, Reader $annotationReader)
     {
@@ -21,13 +22,16 @@ class ResqueListener
         $this->annotationReader = $annotationReader;
     }
 
+    // Not referenced
     public function onBeforeEnqueue($eventArg)
     {
         $class = $eventArg->getClass();
         $throttle = $this->getThrottleAnnotation($class);
-        $throttleKey = $this->throttleKey($class, $throttle);
-        if ($throttle && $this->shouldThrottle($throttleKey, $throttle)) {
-            throw new ThrottledException("'$class' with key '$throttleKey' has exceeded it's throttle limit.");
+        if ($throttle) {
+            $throttleKey = $this->throttleKey($class, $throttle);
+            if ($this->shouldThrottle($throttleKey, $throttle)) {
+                throw new ThrottledException("'$class' with key '$throttleKey' has exceeded it's throttle limit.");
+            }
         }
     }
 
@@ -79,6 +83,7 @@ class ResqueListener
         return "loners:queue:$queue:job:$key";
     }
 
+    // Not referenced
     protected function isLonerQueued($queue, $item)
     {
         $loner = $this->annotationReader->getClassAnnotation($item['class'], 'ShonM\ResqueBundle\Annotation\Loner');
@@ -89,6 +94,7 @@ class ResqueListener
         return $this->resque->redis()->get($this->lonerKey($queue, $item, $loner)) == "1";
     }
 
+    // Not referenced
     protected function markLonerAsQueued($queue, $item)
     {
         $loner = $this->annotationReader->getClassAnnotation($item['class'], 'ShonM\ResqueBundle\Annotation\Loner');
@@ -112,6 +118,7 @@ class ResqueListener
         }
     }
 
+    // Not referenced
     protected function jobDestroy($queue, $class, $args)
     {
         $redisQueue = "queue:$queue";
@@ -124,6 +131,7 @@ class ResqueListener
         }
     }
 
+    // Not referenced
     protected function cleanupLoners($queue)
     {
         $keys = $this->resque->redis()->keys("loners:queue:$queue:job:*");
