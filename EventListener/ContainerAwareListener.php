@@ -3,12 +3,11 @@
 namespace ShonM\ResqueBundle\EventListener;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-
-use ShonM\ResqueBundle\Event as Events;
+use ShonM\ResqueBundle\Event\BeforePerformEvent;
 
 class ContainerAwareListener
 {
-    public function onBeforePerform(Events\BeforePerformEvent $event)
+    public function onBeforePerform(BeforePerformEvent $event)
     {
         $instance = $event->getJob()->getInstance();
 
