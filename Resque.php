@@ -15,11 +15,11 @@ use Resque\Worker;
 
 class Resque extends BaseResque
 {
-    public $track;
+    protected $container;
 
-    private $container;
+    public $tracking;
 
-    public function __construct($redis, ContainerInterface $container, $track = true)
+    public function __construct($redis, ContainerInterface $container)
     {
         $this->container = $container;
 
@@ -34,7 +34,6 @@ class Resque extends BaseResque
             }
         });
 
-        $this->track = (bool) $track;
     }
 
     public function add($jobName, $queueName = 'default', $args = array())
@@ -55,7 +54,7 @@ class Resque extends BaseResque
             parent::redis();
 
             try {
-                $jobId = parent::enqueue($queueName, $class->getName(), $args, $this->track);
+                $jobId = parent::enqueue($queueName, $class->getName(), $args, $this->tracking);
 
                 return $jobId;
             } catch (\ReflectionException $rfe) {
@@ -169,5 +168,10 @@ class Resque extends BaseResque
     public function stat($name)
     {
         return Stat::get($name);
+    }
+
+    public function setTracking($tracking)
+    {
+        $this->tracking = (bool) $tracking;
     }
 }

@@ -12,6 +12,8 @@ parameters:
 services:
     resque:
         class: %resque.class%
-        arguments: [ "%resque.host%:%resque.port%", @service_container, "%resque.track%" ]
+        arguments: [ "%resque.host%:%resque.port%", @service_container ]
+        calls:
+            - [setTracking, ["%resque.track%"]]
     resque.scheduler:
         class: %resque.scheduler.class%
