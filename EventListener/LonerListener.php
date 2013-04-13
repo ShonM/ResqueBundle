@@ -33,8 +33,7 @@ class LonerListener
             'args'  => $event->getArguments(),
         );
 
-        $loner = $this->getLonerAnnotation($class);
-        if (! $loner) {
+        if (!$this->getLonerAnnotation($class)) {
             return;
         }
 
