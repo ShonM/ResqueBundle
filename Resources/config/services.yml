@@ -43,9 +43,9 @@ services:
         class: %resque.loner.listener.class%
         arguments: [ @resque, @annotation_reader ]
         tags:
-            - { name: kernel.event_listener, event: resque.after_perform, method: onAfterPerform }
+            - { name: kernel.event_listener, event: resque.after_perform, method: onDone }
     resque.listener.loner.on_failure:
         class: %resque.loner.listener.class%
         arguments: [ @resque, @annotation_reader ]
         tags:
-            - { name: kernel.event_listener, event: resque.on_failure, method: onFailure }
+            - { name: kernel.event_listener, event: resque.on_failure, method: onDone }
