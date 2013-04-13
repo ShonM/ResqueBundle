@@ -120,8 +120,6 @@ class LonerListener
         $class = $item['class'];
         $args = $item['args'];
 
-        var_dump($class, $args);
-
         if ($loner->keyMethod) {
             $method = $loner->keyMethod;
             $key = $class::$method($class, $args, $loner);
