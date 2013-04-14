@@ -40,12 +40,12 @@ services:
         tags:
             - { name: kernel.event_listener, event: resque.before_enqueue, method: onBeforeEnqueue }
     resque.listener.loner.after_perform:
-        class: %resque.loner.listener.class%
+        class: %resque.listener.loner.class%
         arguments: [ @resque, @annotation_reader ]
         tags:
             - { name: kernel.event_listener, event: resque.after_perform, method: onDone }
     resque.listener.loner.on_failure:
-        class: %resque.loner.listener.class%
+        class: %resque.listener.loner.class%
         arguments: [ @resque, @annotation_reader ]
         tags:
             - { name: kernel.event_listener, event: resque.on_failure, method: onDone }
