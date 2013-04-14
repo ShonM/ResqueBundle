@@ -2,6 +2,7 @@
 
 namespace ShonM\ResqueBundle;
 
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
@@ -33,13 +34,32 @@ class Resque extends BaseResque
                 $instance->setContainer($container);
             }
         });
-
     }
 
     public function add($jobName, $queueName = 'default', $args = array())
     {
-        if (false !== $pos = strpos($jobName, ':')) {
-            $bundle = $this->container->get('kernel')->getBundle(substr($jobName, 0, $pos));
+        $kernel = $this->container->get('kernel');
+        // Will send a PR to the Symfony guys to get access to a list of commands from the kernel. Meanwhile...
+        $application = new Application($kernel);
+        $refl = new \ReflectionMethod($application, 'registerCommands');
+        $refl->setAccessible(true);
+        $refl->invoke($application);
+
+        $command = null;
+
+        try {
+            $command = $application->find($jobName);
+        } catch (\InvalidArgumentException $e) {
+        }
+
+        if ($command !== null) {
+            if (isset($args["command"])) {
+                throw new \InvalidArgumentException("Resque job command may not have a parameter with the name 'command'");
+            }
+            $args["command"] = $jobName;
+            $jobName = 'ShonM\\ResqueBundle\\Job\\CommandJob';
+        } elseif (false !== $pos = strpos($jobName, ':')) {
+            $bundle = $kernel->getBundle(substr($jobName, 0, $pos));
             $jobName = $bundle->getNamespace() . '\\Job\\' . substr($jobName, $pos + 1) . 'Job';
         }
 
