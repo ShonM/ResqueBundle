@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "1787818db7b3aa77b3aa691fe3828610",
+    "hash": "95fb1f0977d13b624518353d6fd0b549",
     "packages": [
 
     ],
@@ -897,12 +897,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "bedac11d5714de7ea367ec8268c3a7d6561eb22d"
+                "reference": "9b6d30cf378d6f70ec490faec468f5ed31b0c53f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/bedac11d5714de7ea367ec8268c3a7d6561eb22d",
-                "reference": "bedac11d5714de7ea367ec8268c3a7d6561eb22d",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/9b6d30cf378d6f70ec490faec468f5ed31b0c53f",
+                "reference": "9b6d30cf378d6f70ec490faec468f5ed31b0c53f",
                 "shasum": ""
             },
             "require": {
@@ -988,7 +988,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-04-12 15:56:02"
+            "time": "2013-04-13 14:14:46"
         },
         {
             "name": "twig/twig",
