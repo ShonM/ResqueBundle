@@ -18,7 +18,7 @@ class JobTestCommand extends ContainerAwareCommand
             ->addOption('throttle', null, InputOption::VALUE_NONE, 'Throttle the job (30 seconds)')
             ->addOption('loner', null, InputOption::VALUE_NONE, 'Make it a Loner job (30 seconds)')
             ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)
-            ->addOption('in', null, InputOption::VALUE_OPTIONAL, 'Seconds before enqueueing (requires an active scheduler)', 0)
+            ->addOption('in', null, InputOption::VALUE_OPTIONAL, 'Seconds before enqueue (requires an active scheduler)', 0)
             ->addOption('at', null, InputOption::VALUE_OPTIONAL, 'Timestamp at which enqueue should happen (requires an active scheduler)', 0)
             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*');
     }
@@ -34,10 +34,9 @@ class JobTestCommand extends ContainerAwareCommand
         return;
     }
 
+
     protected function enqueue(InputInterface $input)
     {
-        $resque = $this->getContainer()->get('resque');
-
         $job = 'TestJob';
 
         if ($input->getOption('throttle')) {

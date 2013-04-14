@@ -2,7 +2,7 @@
     "name": "shonm/resque-bundle",
     "type": "symfony-bundle",
     "description": "Symfony2 bundle for Resque via php-resque",
-    "keywords": ["resque", "redis", "woker", "queue", "php-resque"],
+    "keywords": ["resque", "redis", "worker", "queue", "php-resque"],
     "homepage": "https://github.com/ShonM/ResqueBundle",
     "license": "MIT",
     "authors": [

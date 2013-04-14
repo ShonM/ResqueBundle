@@ -8,6 +8,8 @@ class Worker extends BaseWorker
 {
     private $forkCount = 1;
 
+    private $job;
+
     public function forkInstances($count)
     {
         settype($count, 'int');
