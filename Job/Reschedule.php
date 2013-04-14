@@ -4,9 +4,9 @@ namespace ShonM\ResqueBundle\Job;
 
 /**
  * TODO: some way to stop a repeating task
- * TODO: dont repeat the task untill the previous task completed?
+ * TODO: don't repeat the task until the previous task completed?
  *       would have to be a JobInterface decorator instead of
- *       an independant Job then
+ *       an independent Job then
  */
 class Reschedule extends ContainerAwareJob
 {
