@@ -14,9 +14,11 @@ class JobTestCommand extends ContainerAwareCommand
     {
         $this->setName('resque:job:test')
             ->setDescription('Enqueue\'s a job for testing')
-            ->addOption('fail', null, InputOption::VALUE_NONE, 'If passed, will throw an exception')
+            ->addOption('fail', null, InputOption::VALUE_NONE, 'Throw an exception in the job')
+            ->addOption('throttle', null, InputOption::VALUE_NONE, 'Throttle the job (30 seconds)')
+            ->addOption('loner', null, InputOption::VALUE_NONE, 'Make it a Loner job (30 seconds)')
             ->addOption('times', null, InputOption::VALUE_OPTIONAL, 'Times the job should be enqueued', 1)
-            ->addOption('in', null, InputOption::VALUE_OPTIONAL, 'Seconds before enqueueing (requires an active scheduler)', 0)
+            ->addOption('in', null, InputOption::VALUE_OPTIONAL, 'Seconds before enqueue (requires an active scheduler)', 0)
             ->addOption('at', null, InputOption::VALUE_OPTIONAL, 'Timestamp at which enqueue should happen (requires an active scheduler)', 0)
             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*');
     }
@@ -34,9 +36,18 @@ class JobTestCommand extends ContainerAwareCommand
 
     protected function enqueue(InputInterface $input)
     {
-        $resque = $this->getContainer()->get('resque');
+        $job = 'TestJob';
 
-        $class = 'ShonM\\ResqueBundle\\Job\\TestJob';
+        if ($input->getOption('throttle')) {
+            $job = 'ThrottledTestJob';
+        }
+
+        if ($input->getOption('loner')) {
+            $job = 'LonelyTestJob';
+        }
+
+        $class = 'ShonM\\ResqueBundle\\Job\\' . $job;
+
         $args = array(
             'fail' => $input->getOption('fail'),
         );

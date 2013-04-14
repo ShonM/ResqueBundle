@@ -13,6 +13,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     private $app;
     private $kernel;
     private static $container;
+    private $resque;
 
     protected function setUp()
     {

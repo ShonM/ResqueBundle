@@ -3,7 +3,8 @@
 namespace ShonM\ResqueBundle;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+
+use ShonM\ResqueBundle\Event as Events;
 
 use Resque\Resque as BaseResque;
 use Resque\Redis;
@@ -22,39 +23,73 @@ class Resque extends BaseResque
     public function __construct($redis, ContainerInterface $container)
     {
         $this->container = $container;
-
         parent::setBackend($redis);
 
-        // Forking means this container will become "stale" and workers must be restarted to get a new one
-        Event::listen('beforePerform', function (Job $job) use ($container) {
-            $instance = $job->getInstance();
-
-            if ($instance instanceof ContainerAwareInterface) {
-                $instance->setContainer($container);
-            }
-        });
-
+        $this->hookEvents($this->container);
     }
 
-    public function add($jobName, $queueName = 'default', $args = array())
+    public function hookEvents(ContainerInterface $container)
     {
-        if (false !== $pos = strpos($jobName, ':')) {
-            $bundle = $this->container->get('kernel')->getBundle(substr($jobName, 0, $pos));
-            $jobName = $bundle->getNamespace() . '\\Job\\' . substr($jobName, $pos + 1) . 'Job';
+        $dispatcher = $container->get('event_dispatcher');
+
+        Event::listen('afterEnqueue', function ($class, $arguments, $queue) use ($dispatcher) {
+            $event = new Events\AfterEnqueueEvent($class, $arguments, $queue);
+            $dispatcher->dispatch(ResqueEvents::AFTER_ENQUEUE, $event);
+        });
+
+        Event::listen('beforeFirstFork', function (Worker $worker) use ($dispatcher) {
+            $event = new Events\BeforeFirstForkEvent($worker);
+            $dispatcher->dispatch(ResqueEvents::BEFORE_FIRST_FORK, $event);
+        });
+
+        Event::listen('beforeFork', function (Job $job) use ($dispatcher) {
+            $event = new Events\BeforeForkEvent($job);
+            $dispatcher->dispatch(ResqueEvents::BEFORE_FORK, $event);
+        });
+
+        Event::listen('afterFork', function (Job $job) use ($dispatcher) {
+            $event = new Events\AfterForkEvent($job);
+            $dispatcher->dispatch(ResqueEvents::AFTER_FORK, $event);
+        });
+
+        Event::listen('beforePerform', function (Job $job) use ($dispatcher) {
+            $event = new Events\BeforePerformEvent($job);
+            $dispatcher->dispatch(ResqueEvents::BEFORE_PERFORM, $event);
+        });
+
+        Event::listen('afterPerform', function (Job $job) use ($dispatcher) {
+            $event = new Events\AfterPerformEvent($job);
+            $dispatcher->dispatch(ResqueEvents::AFTER_PERFORM, $event);
+        });
+
+        Event::listen('onFailure', function (\Exception $exception, Job $job) use ($dispatcher) {
+            $event = new Events\OnFailureEvent($exception, $job);
+            $dispatcher->dispatch(ResqueEvents::ON_FAILURE, $event);
+        });
+    }
+
+    public function add($job, $queue = 'default', $arguments = array())
+    {
+        if (false !== $pos = strpos($job, ':')) {
+            $bundle = $this->container->get('kernel')->getBundle(substr($job, 0, $pos));
+            $job = $bundle->getNamespace() . '\\Job\\' . substr($job, $pos + 1) . 'Job';
         }
 
-        if (strpos($queueName, ':') !== false) {
-            list($namespace, $queueName) = explode(':', $queueName);
+        $class = new \ReflectionClass($job);
+
+        $event = new Events\BeforeEnqueueEvent($job, $arguments, $queue);
+        $this->container->get('event_dispatcher')->dispatch(ResqueEvents::BEFORE_ENQUEUE, $event);
+
+        if (strpos($queue, ':') !== false) {
+            list($namespace, $queue) = explode(':', $queue);
             Redis::prefix($namespace);
         }
-
-        $class = new \ReflectionClass($jobName);
 
         try {
             parent::redis();
 
             try {
-                $jobId = parent::enqueue($queueName, $class->getName(), $args, $this->tracking);
+                $jobId = parent::enqueue($queue, $class->getName(), $arguments, $this->tracking);
 
                 return $jobId;
             } catch (\ReflectionException $rfe) {
@@ -63,7 +98,7 @@ class Resque extends BaseResque
         } catch (\CredisException $e) {
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
                 if ($class->implementsInterface('ShonM\ResqueBundle\Job\SynchronousInterface')) {
-                    $job = new Job($queueName, array('class' => $class->getName(), 'args' => array($args)));
+                    $job = new Job($queue, array('class' => $class->getName(), 'args' => array($arguments)));
 
                     return $job->perform();
                 }
