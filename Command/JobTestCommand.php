@@ -34,7 +34,6 @@ class JobTestCommand extends ContainerAwareCommand
         return;
     }
 
-
     protected function enqueue(InputInterface $input)
     {
         $job = 'TestJob';
