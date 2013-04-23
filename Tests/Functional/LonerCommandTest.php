@@ -2,10 +2,6 @@
 
 namespace ShonM\ResqueBundle\Tests\Functional;
 
-use Symfony\Component\Console\Output\Output;
-use Symfony\Component\Console\Input\StringInput;
-
-use Resque\Event;
 use Resque\Job\Status;
 
 class LonerCommandTest extends BaseCommandTest

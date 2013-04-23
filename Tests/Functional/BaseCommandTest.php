@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\StringInput;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 use Resque\Event;
-use Resque\Job\Status;
 
 abstract class BaseCommandTest extends \PHPUnit_Framework_TestCase
 {
