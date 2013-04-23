@@ -79,7 +79,7 @@ EOT
 
             try {
                 $bundle = $this->getContainer()->get('kernel')->getBundle($bundle);
-            } catch (\Exception $e) {
+            } catch (\ErrorException $e) {
                 $output->writeln(sprintf('<bg=red>Bundle "%s" does not exists.</>', $bundle));
             }
         }
