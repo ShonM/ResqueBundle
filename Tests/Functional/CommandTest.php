@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\StringInput;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 use Resque\Event;
+use Resque\Job\Status;
 
 class BaseTest extends \PHPUnit_Framework_TestCase
 {
@@ -76,7 +77,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     {
         $status = $this->runCommand('resque:job:status ' . $jobId);
 
-        $this->assertEquals(1, $status);
+        $this->assertEquals(Status::STATUS_WAITING, $status);
     }
 
     /**
@@ -84,7 +85,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateStatus($jobId)
     {
-        $status = $this->runCommand('resque:job:update ' . $jobId . ' ' . 2);
+        $status = $this->runCommand('resque:job:update ' . $jobId . ' ' . Status::STATUS_RUNNING);
 
         $this->assertEquals('Job updated!', $status);
     }
@@ -96,7 +97,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     {
         $status = $this->runCommand('resque:job:status ' . $jobId);
 
-        $this->assertEquals(2, $status);
+        $this->assertEquals(Status::STATUS_RUNNING, $status);
     }
 
     /**
@@ -120,7 +121,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
         $status = $this->runCommand('resque:job:status ' . $job);
 
-        $this->assertEquals(4, $status);
+        $this->assertEquals(Status::STATUS_COMPLETE, $status);
     }
 }
 
