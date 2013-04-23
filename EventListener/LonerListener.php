@@ -77,7 +77,7 @@ class LonerListener
         if ($loner->ttl == -1) {
             $this->resque->redis()->set($key, true);
         } else {
-            $this->resque->redis()->set($key, true, $loner->ttl);
+            $this->resque->redis()->setex($key, $loner->ttl, true);
         }
     }
 
