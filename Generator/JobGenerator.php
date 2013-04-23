@@ -40,16 +40,16 @@ class JobGenerator extends Generator
         // create a job
         switch($jobType) {
             case 'containeraware':
-                $jobTemplate = 'job/ContainerAwareJob.php';
+                $jobTemplate = 'ContainerAwareJob.php';
                 break;
             case 'synchronous':
-                $jobTemplate = 'job/SynchronousJob.php';
+                $jobTemplate = 'SynchronousJob.php';
                 break;
-            case 'throttle':
-                $jobTemplate = 'job/ThrottleJob.php';
+            case 'throttled':
+                $jobTemplate = 'ThrottledJob.php';
                 break;
             case 'loner':
-                $jobTemplate = 'job/LonerJob.php';
+                $jobTemplate = 'LonerJob.php';
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('The job type format must be containeraware, synchronous, throttled or loner. "%s" given', $jobType));
