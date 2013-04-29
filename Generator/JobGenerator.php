@@ -51,8 +51,11 @@ class JobGenerator extends Generator
             case 'loner':
                 $jobTemplate = 'LonerJob.php';
                 break;
+            case 'none':
+                $jobTemplate = 'BlankJob.php';
+                break;
             default:
-                throw new \InvalidArgumentException(sprintf('The job type format must be containeraware, synchronous, throttled or loner. "%s" given', $jobType));
+                $jobTemplate = 'DefaultJob.php';
                 break;
 
         }

@@ -20,8 +20,8 @@ class Validators
     {
         $format = strtolower($jobType);
 
-        if (!in_array($format, array('containeraware', 'synchronous', 'throttled', 'loner'))) {
-            throw new \RuntimeException(sprintf('The job type must be "containeraware", "synchronous", "throttled" or "loner". "%s" given', $jobType));
+        if (!in_array($format, array('default', 'containeraware', 'synchronous', 'throttled', 'loner', 'none'))) {
+            throw new \RuntimeException(sprintf('The job type must be "default", "containeraware", "synchronous", "throttled", "loner" or "none. "%s" given', $jobType));
         }
 
         return $format;
