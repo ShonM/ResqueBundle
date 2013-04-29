@@ -31,8 +31,8 @@ class GenerateJobCommand extends ContainerAwareCommand
                     'job-type',
                     '',
                     InputOption::VALUE_REQUIRED,
-                    'The type of job to create (default, containeraware, synchronous, throttled, loner, none)',
-                    'default'
+                    'The type of job to create (Default, ContainerAware, Synchronous, Throttled, Loner, None)',
+                    'Default'
                 ),
             ))
             ->setDescription('Generates a job')
@@ -134,7 +134,7 @@ EOT
             '',
         ));
 
-        $jobType = $dialog->askAndValidate($output, $dialog->getQuestion('Job type (default, containeraware, synchronous, throttled, loner or none)', $input->getOption('job-type')), array('ShonM\ResqueBundle\Command\Validators', 'validateJobType'), false, $input->getOption('job-type'));
+        $jobType = $dialog->askAndValidate($output, $dialog->getQuestion('Job type (Default, ContainerAware, Synchronous, Throttled, Loner or None)', $input->getOption('job-type')), array('ShonM\ResqueBundle\Command\Validators', 'validateJobType'), false, $input->getOption('job-type'));
         $input->setOption('job-type', $jobType);
 
         $output->writeln(array(
