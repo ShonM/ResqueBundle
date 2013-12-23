@@ -18,6 +18,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('port')->defaultValue('6379')->end()
                 ->scalarNode('password')->defaultValue('')->end()
                 ->scalarNode('track')->defaultValue(true)->end()
+                ->scalarNode('prefix')->defaultValue('resque')->end()
                 ->arrayNode('strategies')
                     ->children()
                         ->arrayNode('fastcgi')

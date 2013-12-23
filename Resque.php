@@ -9,9 +9,11 @@ class Resque
 {
     public $track;
 
-    public function __construct($redis, ContainerInterface $container, $track = true)
+    public function __construct($redis, ContainerInterface $container, $track = true, $namespace = 'resque')
     {
         \Resque::setBackend($redis);
+
+        \Resque_Redis::prefix($namespace);
 
         \Resque_Event::listen('beforePerform', function(\Resque_Job $job) use ($container) {
             // TODO: will this have issues because of forking? Would it be better to create a new container?
