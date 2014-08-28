@@ -4,21 +4,21 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d5dfe702ed6c2e151f4c6f8f0f1fa3fd",
+    "hash": "6582a661f75d1bfea904e24e5862d8f2",
     "packages": [],
     "packages-dev": [
         {
             "name": "colinmollenhour/credis",
-            "version": "dev-master",
+            "version": "1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/colinmollenhour/credis.git",
-                "reference": "44332e92d26699e71a9ffaae4e92f33f9db6010d"
+                "reference": "2079564c61cc49867eddc3cc918c711564164d65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/colinmollenhour/credis/zipball/44332e92d26699e71a9ffaae4e92f33f9db6010d",
-                "reference": "44332e92d26699e71a9ffaae4e92f33f9db6010d",
+                "url": "https://api.github.com/repos/colinmollenhour/credis/zipball/2079564c61cc49867eddc3cc918c711564164d65",
+                "reference": "2079564c61cc49867eddc3cc918c711564164d65",
                 "shasum": ""
             },
             "require": {
@@ -28,8 +28,7 @@
             "autoload": {
                 "classmap": [
                     "Client.php",
-                    "Cluster.php",
-                    "Sentinel.php"
+                    "Cluster.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -44,7 +43,7 @@
             ],
             "description": "Credis is a lightweight interface to the Redis key-value store which wraps the phpredis library when available for better performance.",
             "homepage": "https://github.com/colinmollenhour/credis",
-            "time": "2014-08-13 15:01:26"
+            "time": "2014-05-05 19:31:30"
         },
         {
             "name": "doctrine/annotations",
@@ -1471,7 +1470,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "shonm/php-resque": 20,
-        "colinmollenhour/credis": 20,
         "mtdowling/cron-expression": 20
     },
     "prefer-stable": false,
