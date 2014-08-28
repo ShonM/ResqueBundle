@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6582a661f75d1bfea904e24e5862d8f2",
+    "hash": "7374e146d2ffbb81e309d60a472a406e",
     "packages": [],
     "packages-dev": [
         {
@@ -1242,7 +1242,7 @@
                     "Resque": "lib/"
                 }
             },
-            "time": "2014-08-28 18:09:02"
+            "time": "2014-08-28 18:37:21"
         },
         {
             "name": "symfony/icu",

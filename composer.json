@@ -31,7 +31,7 @@
     "require-dev": {
         "symfony/symfony": ">=2.1,<3.0-dev",
         "shonm/php-resque": "dev-fastcgi",
-        "colinmollenhour/credis": "~1.2",
+        "colinmollenhour/credis": "~1.4",
         "mtdowling/cron-expression": "dev-master",
         "phpunit/phpunit": "~4.4"
     },
