@@ -33,7 +33,7 @@
         "shonm/php-resque": "dev-fastcgi",
         "colinmollenhour/credis": "dev-master",
         "mtdowling/cron-expression": "dev-master",
-        "phpunit/phpunit": "3.8.x-dev"
+        "phpunit/phpunit": "~4.4"
     },
     "autoload": {
         "psr-0": { "ShonM\\ResqueBundle": "" }
