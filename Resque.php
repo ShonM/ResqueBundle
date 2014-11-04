@@ -9,7 +9,9 @@ class Resque
 {
     public $track;
 
-    public function __construct($redis, ContainerInterface $container, $track = true, $namespace = 'resque')
+    public $synchronous = false;
+
+    public function __construct($redis, ContainerInterface $container, $track = true, $namespace = 'resque', $synchronous = false)
     {
         \Resque::setBackend($redis);
 
@@ -44,6 +46,7 @@ class Resque
         });
 
         $this->track = (bool) $track;
+        $this->synchronous = (bool) $synchronous;
     }
 
     public function __call($func, $args)
@@ -53,13 +56,16 @@ class Resque
 
     public function add($jobName, $queueName = 'default', $args = array())
     {
-
         if (strpos($queueName, ':') !== false) {
             list($namespace, $queueName) = explode(':', $queueName);
             \Resque_Redis::prefix($namespace);
         }
 
         $klass = new \ReflectionClass($jobName);
+
+        if ($this->synchronous) {
+            return $this->performSynchronously($queueName, $klass, $args);
+        }
 
         try {
             \Resque::redis();
@@ -74,13 +80,18 @@ class Resque
         } catch (\CredisException $e) {
             if (strpos($e->getMessage(), 'Connection to Redis failed') !== false) {
                 if (in_array('ShonM\ResqueBundle\Jobs\SynchronousInterface', class_implements($jobName))) {
-                    $j = new \Resque_Job($queueName, array('class' => $klass->getName(), 'args' => array($args)));
-                    return $j->perform();
+                    return $this->performSynchronously($queueName, $klass, $args);
                 }
             }
 
             throw $e;
         }
+    }
+
+    private function performSynchronously($queueName, $klass, $args)
+    {
+        $j = new \Resque_Job($queueName, array('class' => $klass->getName(), 'args' => array($args)));
+        return $j->perform();
     }
 
     public function check($jobId, $namespace = false)
