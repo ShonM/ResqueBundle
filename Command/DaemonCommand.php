@@ -20,7 +20,8 @@ class DaemonCommand extends ContainerAwareCommand
             ->setDescription("Starts Resque worker(s)")
             ->addArgument('queue', InputArgument::OPTIONAL, 'Queue name', '*')
             ->addOption('log', 'l', InputOption::VALUE_OPTIONAL, 'Log mode [verbose|normal|none]')
-            ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 5)
+            ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 3)
+            ->addOption('blocking', null, InputOption::VALUE_NONE, 'Use blocking pops (interval will be block time)')
             ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1)
             ->addOption('strategy', null, InputOption::VALUE_OPTIONAL, 'Job strategy [fork|fastcgi|inprocess]', 'fork');
     }
@@ -36,6 +37,7 @@ class DaemonCommand extends ContainerAwareCommand
         $worker->defineQueue($input->getArgument('queue'));
         $worker->verbose($input->getOption('log'));
         $worker->setInterval($input->getOption('interval'));
+        $worker->setBlocking($input->getOption('blocking'));
         $worker->forkInstances($input->getOption('forkCount'));
 
         switch($input->getOption('strategy')) {

@@ -11,6 +11,7 @@ class WorkerDaemon
     private $queue = '*';
     private $logging = 'normal';
     private $checkerInterval = 5;
+    private $blocking = false;
     private $forkCount = 1;
     private $jobStrategy;
 
@@ -33,6 +34,11 @@ class WorkerDaemon
     public function setInterval($interval)
     {
         $this->checkerInterval = (int) $interval;
+    }
+
+    public function setBlocking($blocking)
+    {
+        $this->blocking = $blocking;
     }
 
     public function forkInstances($count)
@@ -85,7 +91,7 @@ class WorkerDaemon
         }
 
         fwrite(STDOUT, '*** Starting worker: ' . $worker . "\n");
-        $worker->work($this->checkerInterval);
+        $worker->work($this->checkerInterval, $this->blocking);
     }
 
     public function daemonize()
