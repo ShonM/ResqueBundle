@@ -7,8 +7,8 @@ class ResqueExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'json_pretty' => new \Twig_Filter_Method($this, 'jsonPretty', array('is_safe' => array('html'))),
-            'iso8601' => new \Twig_Filter_Method($this, 'iso8601'),
+            new \Twig_SimpleFilter('json_pretty', array($this, 'jsonPretty'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFilter('iso8601', array($this, 'iso8601')),
         );
     }
 
