@@ -23,7 +23,8 @@ class DaemonCommand extends ContainerAwareCommand
             ->addOption('interval', 'i', InputOption::VALUE_OPTIONAL, 'Daemon check interval (in seconds)', 3)
             ->addOption('blocking', null, InputOption::VALUE_NONE, 'Use blocking pops (interval will be block time)')
             ->addOption('forkCount', 'f', InputOption::VALUE_OPTIONAL, 'Fork instances count', 1)
-            ->addOption('strategy', null, InputOption::VALUE_OPTIONAL, 'Job strategy [fork|fastcgi|inprocess]', 'fork');
+            ->addOption('batchCount', 'b', InputOption::VALUE_OPTIONAL, 'Batch count (jobs per fork)', 10)
+            ->addOption('strategy', null, InputOption::VALUE_OPTIONAL, 'Job strategy [fork|batch|fastcgi|inprocess]', 'fork');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -43,6 +44,9 @@ class DaemonCommand extends ContainerAwareCommand
         switch($input->getOption('strategy')) {
             case 'fork':
                 $jobStrategy = new Resque_JobStrategy_Fork;
+                break;
+            case 'batch':
+                $jobStrategy = new Resque_JobStrategy_Batch($input->getOption('batchCount'));
                 break;
             case 'fastcgi':
                 $options = $container->hasParameter('resque.strategies.fastcgi') ? $container->getParameter('resque.strategies.fastcgi') : array();
