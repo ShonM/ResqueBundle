@@ -14,17 +14,17 @@ parameters:
 services:
     resque:
         class: %resque.class%
-        arguments: [ "%resque.host%:%resque.port%", @service_container, "%resque.track%", "%resque.prefix%" ]
+        arguments: [ "%resque.host%:%resque.port%", "@service_container", "%resque.track%", "%resque.prefix%" ]
     resque.worker_daemon:
         class: %resque.worker_daemon.class%
         arguments: [ "%resque.host%:%resque.port%", "%resque.password%" ]
         prototype: true
     resque.scheduler:
         class: %resque.scheduler.class%
-        arguments: [ @resque ]
+        arguments: [ "@resque" ]
     resque.scheduler_daemon:
         class: %resque.scheduler_daemon.class%
-        arguments: [ @resque.scheduler ]
+        arguments: [ "@resque.scheduler" ]
     resque.twig.resque_extension:
         class: ShonM\ResqueBundle\Twig\ResqueExtension
         tags:
