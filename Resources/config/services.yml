@@ -18,7 +18,7 @@ services:
     resque.worker_daemon:
         class: '%resque.worker_daemon.class%'
         arguments: [ "%resque.host%:%resque.port%", "%resque.password%" ]
-        prototype: true
+        shared: false
     resque.scheduler:
         class: '%resque.scheduler.class%'
         arguments: [ "@resque" ]
